@@ -11,6 +11,7 @@ Hotkey_Run = {x}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\inventory.png")
+redboxIcon := GetFile("Medivia\Icons\Mixin\redbox.png")
 battleIcon := GetFile("Medivia\Icons\Window\battle.png")
 
 key := HotkeyClear(Hotkey_Run)
@@ -32,15 +33,21 @@ UseItem:
     MouseGetPos, targetX, targetY
 
     If (GetKeyState("ScrollLock", "T")) {
-        ImageSearch, battleX, battleY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %battleIcon%
+        ImageSearch, targetX, targetY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *TransBlack %redboxIcon%
 
-        If (ErrorLevel = 1) {
+        If (ErrorLevel != 0) {
+            ImageSearch, battleX, battleY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %battleIcon%
+
+            If (ErrorLevel == 0) {
+                targetX := battleX + 10
+                targetY := battleY + 50
+            }
+        }
+
+        If (!targetX || !targetY) {
             Notify("Open battle list first.")
             Return
         }
-
-        targetX := battleX + 10
-        targetY := battleY + 50
     }
 
     MouseBackup()
