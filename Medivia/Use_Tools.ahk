@@ -1,5 +1,5 @@
 ; Set hotkey to use item on cursor position.
-; Uses Hunter's Knife or Skinning Knife, it depends on the first item on screen (from LEFT to RIGHT / TOP to BOTTOM)
+; Uses Rope, Shovel, Pick, Machete, Advanced Pick, it depends on the first item on screen (from LEFT to RIGHT / TOP to BOTTOM)
 
 ; Settings
 Hotkey_Run = {MButton}

@@ -1,7 +1,7 @@
 ; Set hotkey to use item on cursor position.
 
 ; Settings
-Hotkey_Run = {XButton2}
+Hotkey_Run = {PgUp}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;

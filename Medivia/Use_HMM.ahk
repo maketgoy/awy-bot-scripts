@@ -2,7 +2,7 @@
 ; If ScrollLock is on, it will use on battle list.
 
 ; Settings
-Hotkey_Run = {PgUp}
+Hotkey_Run = {Home}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
