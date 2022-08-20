@@ -75,7 +75,7 @@ UseItem:
 
     If (itemX > 0 && itemY > 0) {
         MouseGetPos, targetX, targetY
-        MouseClick, right, %runeX%, %runeY%, 1, 0
+        MouseClick, right, %itemX%, %itemY%, 1, 0
         MouseClick, left, %targetX%, %targetY%, 1, 0
     }
 
