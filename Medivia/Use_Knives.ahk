@@ -10,10 +10,7 @@ Hotkey_Run = {MButton}
 
 SetMouseDelay, -1
 
-huntIcon := GetFile("Medivia\Icons\Tool\hunters_knife.png")
-skinIcon := GetFile("Medivia\Icons\Tool\skinning_knife.png")
-
-items := ["hunters_knife", "skinning_knife"]
+icons := [ GetFile("Medivia\Icons\Tool\hunters_knife.png"), GetFile("Medivia\Icons\Tool\skinning_knife.png") ]
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
@@ -24,10 +21,8 @@ UseItem:
     itemX := False
     itemY := False
 
-    For key, value in items
+    For key, icon in icons
     {
-        icon := GetFile("Medivia\Icons\Tool\" value ".png")
-
         ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
         If (ErrorLevel > 0) {
             Continue
