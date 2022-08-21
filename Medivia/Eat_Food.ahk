@@ -15,7 +15,7 @@ Return
 
 EatFood:
 {
-    ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %pzIcon%
+    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %pzIcon%
     If (ErrorLevel = 0) {
         Return
     }
@@ -24,7 +24,7 @@ EatFood:
     {
         icon := GetFile("Medivia\Icons\Food\" value ".png")
 
-        ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
+        ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %icon%
 
         If (ErrorLevel > 0) {
             Continue

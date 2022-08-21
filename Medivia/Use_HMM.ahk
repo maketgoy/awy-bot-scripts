@@ -20,7 +20,7 @@ Return
 
 UseItem:
 {
-    ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
+    ImageSearch, itemX, itemY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %itemIcon%
 
     If (ErrorLevel = 1) {
         Notify("HMM not found.")
@@ -30,12 +30,12 @@ UseItem:
     MouseGetPos, targetX, targetY
 
     If (GetKeyState("ScrollLock", "T")) {
-        ImageSearch, targetX, targetY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *TransBlack %redboxIcon%
+        ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %battleIcon%
 
-        If (ErrorLevel != 0) {
-            ImageSearch, battleX, battleY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %battleIcon%
+        If (ErrorLevel == 0) {
+            ImageSearch, targetX, targetY, battleX - 10, battleY + 40, battleX + 150, A_ScreenHeight, *TransBlack %redboxIcon%
 
-            If (ErrorLevel == 0) {
+            If (ErrorLevel > 0) {
                 targetX := battleX + 10
                 targetY := battleY + 50
             }
