@@ -13,34 +13,35 @@ SetMouseDelay, -1
 huntIcon := GetFile("Medivia\Icons\Tool\hunters_knife.png")
 skinIcon := GetFile("Medivia\Icons\Tool\skinning_knife.png")
 
+items := ["hunters_knife", "skinning_knife"]
+
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
 Return
 
 UseItem:
 {
-    ImageSearch, huntX, huntY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %huntIcon%
-    foundHunt := ErrorLevel == 0
+    itemX := False
+    itemY := False
 
-    ImageSearch, skinX, skinY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %skinIcon%
-    foundSkin := ErrorLevel == 0
+    For key, value in items
+    {
+        icon := GetFile("Medivia\Icons\Tool\" value ".png")
 
-    If (!foundHunt && !foundSkin) {
-        Notify("Knife not found.")
-        Return
+        ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
+        If (ErrorLevel > 0) {
+            Continue
+        }
+
+        If (!itemY || iconY < itemY) {
+            itemX := iconX
+            itemY := iconY
+        }
     }
 
-    runeX := foundSkin ? skinX : huntX
-    runeY := foundSkin ? skinY : huntY
-
-    If (foundHunt) {
-        If (huntX < skinX) {
-            runeX := huntX
-            runeY := huntY
-        } Else If (huntY < skinY) {
-            runeX := huntX
-            runeY := huntY
-        }
+    If (!itemX && !itemY) {
+        Notify("Knife not found.")
+        Return
     }
 
     MouseGetPos, targetX, targetY
