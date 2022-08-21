@@ -27,7 +27,7 @@ UseItem:
 
     ImageSearch, ropeX, ropeY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %ropeIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || ropeX < itemX) {
+        If (!itemY || ropeY < itemY) {
             itemX := ropeX
             itemY := ropeY
         }
@@ -35,7 +35,7 @@ UseItem:
 
     ImageSearch, shovelX, shovelY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %shovelIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || shovelX < itemX) {
+        If (!itemY || shovelY < itemY) {
             itemX := shovelX
             itemY := shovelY
         }
@@ -43,7 +43,7 @@ UseItem:
 
     ImageSearch, pickX, pickY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %pickIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || pickX < itemX) {
+        If (!itemY || pickY < itemY) {
             itemX := pickX
             itemY := pickY
         }
@@ -51,7 +51,7 @@ UseItem:
 
     ImageSearch, pickX, pickY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %pickIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || pickX < itemX) {
+        If (!itemY || pickY < itemY) {
             itemX := pickX
             itemY := pickY
         }
@@ -59,7 +59,7 @@ UseItem:
 
     ImageSearch, macheteX, macheteY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %macheteIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || macheteX < itemX) {
+        If (!itemY || macheteY < itemY) {
             itemX := macheteX
             itemY := macheteY
         }
@@ -67,7 +67,7 @@ UseItem:
 
     ImageSearch, advPickX, advPickY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %advPickIcon%
     If (ErrorLevel == 0) {
-        If (!itemX || advPickX < itemX) {
+        If (!itemY || advPickY < itemY) {
             itemX := advPickX
             itemY := advPickY
         }
