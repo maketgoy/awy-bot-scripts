@@ -33,6 +33,9 @@ UseItem:
         If (!itemY || iconY < itemY) {
             itemX := iconX
             itemY := iconY
+        } Else If (iconY == itemY && iconX < itemX) {
+            itemX := iconX
+            itemY := iconY
         }
     }
 
