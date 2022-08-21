@@ -10,7 +10,9 @@ Hotkey_Run = {MButton}
 
 SetMouseDelay, -1
 
-icons := [ GetFile("Medivia\Icons\Tool\hunters_knife.png"), GetFile("Medivia\Icons\Tool\skinning_knife.png") ]
+icons := [ GetFile("Medivia\Icons\Tool\hunters_knife.png")
+    , GetFile("Medivia\Icons\Tool\skinpeeler.png")
+    , GetFile("Medivia\Icons\Tool\skinning_knife.png") ]
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
