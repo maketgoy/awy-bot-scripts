@@ -6,36 +6,69 @@
 
 SetMouseDelay, -1
 
-icons := ["brown_mushroom", "fire_mushroom", "green_mushroom", "white_mushroom", "meat", "herring", "ham", "dragon_ham", "frozen_ham", "egg", "apple", "blueberry", "bread", "brown_bread", "carrot", "cheese", "corncob", "cranberry", "grape", "honeycomb", "orange", "roll"]
 pzIcon := GetFile("Medivia\Icons\Status\protect.png")
 
-SetTimer, EatFood, 60000
-Gosub, EatFood
+icons := [ GetFile("Medivia\Icons\Food\brown_mushroom.png")
+    , GetFile("Medivia\Icons\Food\green_mushroom.png")
+    , GetFile("Medivia\Icons\Food\white_mushroom.png")
+    , GetFile("Medivia\Icons\Food\fire_mushroom.png")
+    , GetFile("Medivia\Icons\Food\herring.png")
+    , GetFile("Medivia\Icons\Food\meat.png")
+    , GetFile("Medivia\Icons\Food\ham.png")
+    , GetFile("Medivia\Icons\Food\dragon_ham.png")
+    , GetFile("Medivia\Icons\Food\frozen_ham.png")
+    , GetFile("Medivia\Icons\Food\egg.png")
+    , GetFile("Medivia\Icons\Food\apple.png")
+    , GetFile("Medivia\Icons\Food\blueberry.png")
+    , GetFile("Medivia\Icons\Food\bread.png")
+    , GetFile("Medivia\Icons\Food\brown_bread.png")
+    , GetFile("Medivia\Icons\Food\carrot.png")
+    , GetFile("Medivia\Icons\Food\cheese.png")
+    , GetFile("Medivia\Icons\Food\corncob.png")
+    , GetFile("Medivia\Icons\Food\cranberry.png")
+    , GetFile("Medivia\Icons\Food\grape.png")
+    , GetFile("Medivia\Icons\Food\honeycomb.png")
+    , GetFile("Medivia\Icons\Food\orange.png")
+    , GetFile("Medivia\Icons\Food\roll.png") ]
+
+SetTimer, UseItem, 60000
+Gosub, UseItem
 Return
 
-EatFood:
+UseItem:
 {
+    itemX := False
+    itemY := False
+
     ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %pzIcon%
     If (ErrorLevel = 0) {
         Return
     }
 
-    For key, value in icons
+    For key, icon in icons
     {
-        icon := GetFile("Medivia\Icons\Food\" value ".png")
-
         ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %icon%
-
         If (ErrorLevel > 0) {
             Continue
         }
 
-        MouseBackup()
-        Click, %iconX% %iconY% 1 Right
-        MouseRestore()
-
-        Break
+        If (!itemY || iconY < itemY) {
+            itemX := iconX
+            itemY := iconY
+        } Else If (iconY == itemY && iconX < itemX) {
+            itemX := iconX
+            itemY := iconY
+        }
     }
+
+    If (!itemX || !itemY) {
+        Notify("Food not found.")
+        Return
+    }
+
+    MouseBackup()
+    Click, %iconX% %iconY% 1 Right
+    MouseRestore()
 
     Return
 }

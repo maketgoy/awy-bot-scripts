@@ -26,7 +26,7 @@ UseItem:
 
     For key, icon in icons
     {
-        ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
+        ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %icon%
         If (ErrorLevel > 0) {
             Continue
         }
