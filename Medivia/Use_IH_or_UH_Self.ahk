@@ -16,7 +16,7 @@ SetMouseDelay, -1
 icons := [ GetFile("Medivia\Icons\Rune\ih.png")
     , GetFile("Medivia\Icons\Rune\uh.png") ]
 
-battleIcon := GetFile("Medivia\Icons\Status\protect.png")
+battleIcon := GetFile("Medivia\Icons\Status\battle.png")
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
