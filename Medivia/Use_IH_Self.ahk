@@ -12,6 +12,7 @@ Hotkey_Run = {XButton1}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\Rune\ih.png")
+battleIcon := GetFile("Medivia\Icons\Status\battle.png")
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
@@ -24,8 +25,12 @@ UseItem:
         Return
     }
 
-    ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
+    ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %battleIcon%
+    If (ErrorLevel != 0) {
+        Return
+    }
 
+    ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
     If (ErrorLevel = 1) {
         Notify("IH not found.")
         Return

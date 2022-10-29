@@ -1,11 +1,11 @@
 ; Set hotkey to use item on cursor position.
 ; Uses IH or UH, it depends on the first item on screen (from LEFT to RIGHT / TOP to BOTTOM)
+; Only when you are in battle.
 
 ; Settings
 Self_PosX = 0
 Self_PosY = 0
 Hotkey_Run = {XButton1}
-OnlyOnBattle = True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -25,7 +25,7 @@ Return
 UseItem:
 {
     ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %battleIcon%
-    If (ErrorLevel = 0) {
+    If (ErrorLevel != 0) {
         Return
     }
 
