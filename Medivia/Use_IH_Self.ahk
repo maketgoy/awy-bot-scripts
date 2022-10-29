@@ -26,7 +26,7 @@ UseItem:
     }
 
     ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %battleIcon%
-    If (ErrorLevel != 0) {
+    If (ErrorLevel = 1) {
         Return
     }
 
