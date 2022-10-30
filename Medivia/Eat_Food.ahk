@@ -67,7 +67,7 @@ UseItem:
     }
 
     MouseBackup()
-    Click, %iconX% %iconY% 1 Right
+    Click, %itemX% %itemY% 1 Right
     MouseRestore()
 
     Return
