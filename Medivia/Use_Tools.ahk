@@ -14,7 +14,8 @@ icons := [ GetFile("Medivia\Icons\Tool\rope.png")
     , GetFile("Medivia\Icons\Tool\shovel.png")
     , GetFile("Medivia\Icons\Tool\pick.png")
     , GetFile("Medivia\Icons\Tool\machete.png")
-    , GetFile("Medivia\Icons\Tool\advanced_pick.png") ]
+    , GetFile("Medivia\Icons\Tool\advanced_pick.png")
+    , GetFile("Medivia\Icons\Tool\pumpkin_shovel.png") ]
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
