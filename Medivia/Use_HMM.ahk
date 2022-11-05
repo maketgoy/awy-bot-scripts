@@ -3,6 +3,7 @@
 
 ; Settings
 Hotkey_Run = {Home}
+Check_Chat := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -11,6 +12,7 @@ Hotkey_Run = {Home}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\Rune\hmm.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 redboxIcon := GetFile("Medivia\Icons\Mixin\redbox.png")
 battleIcon := GetFile("Medivia\Icons\Window\battle.png")
 
@@ -25,6 +27,11 @@ UseItem:
     If (ErrorLevel = 1) {
         Notify("HMM not found.")
         Return
+    }
+
+    If (Check_Chat_Off) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) Return
     }
 
     MouseGetPos, targetX, targetY

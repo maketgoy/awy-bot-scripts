@@ -16,6 +16,8 @@ Return
 
 Action:
 {
+    Send, ^{q}
+    Sleep, 200
     Process, Close, medivia.exe
     Return
 }
