@@ -2,6 +2,7 @@
 
 ; Settings
 Hotkey_Run = {PgUp}
+Check_Chat := False
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -10,6 +11,7 @@ Hotkey_Run = {PgUp}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\Rune\gfb.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
@@ -18,10 +20,17 @@ Return
 UseItem:
 {
     ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
-
-    If (ErrorLevel = 1) {
-        Notify("GFB not found.")
+    If (ErrorLevel != 0) {
+        itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
+        Notify(itemName " not found.")
         Return
+    }
+
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Return
+        }
     }
 
     MouseGetPos, targetX, targetY

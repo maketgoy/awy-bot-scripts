@@ -3,6 +3,7 @@
 
 ; Settings
 Hotkey_Run = {XButton2}
+Check_Chat := False
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -11,6 +12,7 @@ Hotkey_Run = {XButton2}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\Rune\sd.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 redboxIcon := GetFile("Medivia\Icons\Mixin\redbox.png")
 battleIcon := GetFile("Medivia\Icons\Window\battle.png")
 
@@ -21,10 +23,17 @@ Return
 UseItem:
 {
     ImageSearch, itemX, itemY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %itemIcon%
-
-    If (ErrorLevel = 1) {
-        Notify("SD not found.")
+    If (ErrorLevel != 0) {
+        itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
+        Notify(itemName " not found.")
         Return
+    }
+
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Return
+        }
     }
 
     MouseGetPos, targetX, targetY
@@ -35,7 +44,7 @@ UseItem:
         If (ErrorLevel == 0) {
             ImageSearch, targetX, targetY, battleX - 10, battleY + 40, battleX + 150, A_ScreenHeight, *TransBlack %redboxIcon%
 
-            If (ErrorLevel > 0) {
+            If (ErrorLevel != 0) {
                 targetX := battleX + 10
                 targetY := battleY + 50
 

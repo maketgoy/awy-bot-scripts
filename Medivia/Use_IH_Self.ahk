@@ -4,6 +4,7 @@
 Self_PosX = 0
 Self_PosY = 0
 Hotkey_Run = {XButton1}
+Check_Chat := False
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -12,6 +13,7 @@ Hotkey_Run = {XButton1}
 SetMouseDelay, -1
 
 itemIcon := GetFile("Medivia\Icons\Rune\ih.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 battleIcon := GetFile("Medivia\Icons\Status\battle.png")
 
 key := HotkeyClear(Hotkey_Run)
@@ -25,15 +27,18 @@ UseItem:
         Return
     }
 
-    ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %battleIcon%
-    If (ErrorLevel = 1) {
+    ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
+    If (ErrorLevel != 0) {
+        itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
+        Notify(itemName " not found.")
         Return
     }
 
-    ImageSearch, itemX, itemY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %itemIcon%
-    If (ErrorLevel = 1) {
-        Notify("IH not found.")
-        Return
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Return
+        }
     }
 
     MouseBackup()

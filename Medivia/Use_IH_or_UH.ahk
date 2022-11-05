@@ -3,6 +3,7 @@
 
 ; Settings
 Hotkey_Run = {XButton1}
+Check_Chat := False
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -12,6 +13,7 @@ SetMouseDelay, -1
 
 ihIcon := GetFile("Medivia\Icons\Rune\ih.png")
 uhIcon := GetFile("Medivia\Icons\Rune\uh.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 
 key := HotkeyClear(Hotkey_Run)
 Hotkey, ~$%key%, UseItem, On
@@ -28,6 +30,13 @@ UseItem:
     If (!foundIH && !foundUH) {
         Notify("IH/UH not found.")
         Return
+    }
+
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Return
+        }
     }
 
     runeX := foundUH ? uhX : ihX
