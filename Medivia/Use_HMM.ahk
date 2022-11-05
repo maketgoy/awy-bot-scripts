@@ -38,6 +38,11 @@ UseItem:
             If (ErrorLevel > 0) {
                 targetX := battleX + 10
                 targetY := battleY + 50
+
+                ; Get target
+                MouseBackup()
+                MouseClick, left, %targetX%, %targetY%, 1, 0
+                MouseRestore()
             }
         }
     }
