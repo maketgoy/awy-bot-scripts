@@ -32,6 +32,7 @@ UseItem:
     If (Check_Chat) {
         ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
         If (ErrorLevel == 0) {
+            Sleep, 200
             Return
         }
     }
