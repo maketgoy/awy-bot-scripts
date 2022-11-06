@@ -22,19 +22,19 @@ Return
 
 UseItem:
 {
-    ImageSearch, itemX, itemY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %itemIcon%
-    If (ErrorLevel != 0) {
-        itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
-        Notify(itemName " not found.")
-        Return
-    }
-
     If (Check_Chat) {
         ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
         If (ErrorLevel == 0) {
             Sleep, 200
             Return
         }
+    }
+
+    ImageSearch, itemX, itemY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %itemIcon%
+    If (ErrorLevel != 0) {
+        itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
+        Notify(itemName " not found.")
+        Return
     }
 
     MouseGetPos, targetX, targetY

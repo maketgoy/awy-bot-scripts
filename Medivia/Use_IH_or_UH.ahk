@@ -21,6 +21,14 @@ Return
 
 UseItem:
 {
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Sleep, 200
+            Return
+        }
+    }
+
     ImageSearch, ihX, ihY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %ihIcon%
     foundIH := ErrorLevel == 0
 
@@ -30,14 +38,6 @@ UseItem:
     If (!foundIH && !foundUH) {
         Notify("IH/UH not found.")
         Return
-    }
-
-    If (Check_Chat) {
-        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
-        If (ErrorLevel == 0) {
-            Sleep, 200
-            Return
-        }
     }
 
     runeX := foundUH ? uhX : ihX

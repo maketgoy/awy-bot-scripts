@@ -25,6 +25,14 @@ Return
 
 UseItem:
 {
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Sleep, 200
+            Return
+        }
+    }
+
     itemX := False
     itemY := False
 
@@ -47,14 +55,6 @@ UseItem:
     If (!itemX || !itemY) {
         Notify("IH/UH not found.")
         Return
-    }
-
-    If (Check_Chat) {
-        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
-        If (ErrorLevel == 0) {
-            Sleep, 200
-            Return
-        }
     }
 
     MouseBackup()

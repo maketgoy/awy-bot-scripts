@@ -22,6 +22,14 @@ Return
 
 UseItem:
 {
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Sleep, 200
+            Return
+        }
+    }
+
     If (!Self_PosX || !Self_PosY) {
         Notify("Set the positions first.")
         Return
@@ -32,14 +40,6 @@ UseItem:
         itemName := StrReplace(StrSplit(itemIcon, "\").pop(), ".png")
         Notify(itemName " not found.")
         Return
-    }
-
-    If (Check_Chat) {
-        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransBlack %inputIcon%
-        If (ErrorLevel == 0) {
-            Sleep, 200
-            Return
-        }
     }
 
     MouseBackup()
