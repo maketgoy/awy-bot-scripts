@@ -3,6 +3,7 @@
 
 ; Settings
 Hotkey_Run = {MButton}
+Check_Chat := False
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -21,12 +22,22 @@ icons := [ GetFile("Medivia\Icons\Tool\rope.png")
     , GetFile("Medivia\Icons\Tool\pumpkin_shovel.png")
     , GetFile("Medivia\Icons\Tool\modified_fishing_rod.png") ]
 
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
+
 key := HotkeyClear(Hotkey_Run)
-Hotkey, ~$%key%, UseItem, On
+Hotkey, ~$%key%, Action, On
 Return
 
-UseItem:
+Action:
 {
+    If (Check_Chat) {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransBlack %inputIcon%
+        If (ErrorLevel == 0) {
+            Sleep, 200
+            Return
+        }
+    }
+
     itemX := False
     itemY := False
 
