@@ -6,6 +6,7 @@ Hotkey_Run = {MButton}
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 SetMouseDelay, -1
+SetDefaultMouseSpeed, 0
 
 orderIcon := GetFile("PokePlanet\Icons\order.png")
 
