@@ -24,7 +24,7 @@ Action:
 
     MouseBackup()
     Click, %orderX%, %orderY%, Right
-    Sleep, 10
+    Sleep, 50
     Click, %MouseBackupX%, %MouseBackupY%, Left
 
     Sleep, 200
