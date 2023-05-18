@@ -36,22 +36,13 @@ Action:
      For key, water in waters
     {
         ImageSearch, waterX, waterY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
-        If (ErrorLevel > 0) {
-            Continue
-        }
 
-        If (!itemY || iconY < itemY) {
-            itemX := iconX
-            itemY := iconY
-        } Else If (iconY == itemY && iconX < itemX) {
-            itemX := iconX
-            itemY := iconY
+        If (ErrorLevel == 0) {
+            MouseClick, right, %itemX%, %itemY%, 1, 0
+            MouseClick, left, %waterX%, %waterY%, 1, 0
+            Break
         }
     }
-
-    MouseGetPos, targetX, targetY
-    MouseClick, right, %itemX%, %itemY%, 1, 0
-    MouseClick, left, %targetX%, %targetY%, 1, 0
 
     Sleep, 200
     Return
