@@ -14,7 +14,7 @@ SetMouseDelay, -1
 
 mpPosX := 20
 mpPosY := 75
-mpWidth := MP_Percent
+mpWidth := MP_Bar_Width
 
 Loop
 {
