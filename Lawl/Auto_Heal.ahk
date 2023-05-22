@@ -20,9 +20,9 @@ hpWidth := HP_Bar_Width
 Loop
 {
     pixelX := hpPosX + (HP_Bar_Width * HP_Percent / 100)
-    PixelGetColor, color, %pixelX%, %hpPosY%
+    PixelSearch, foundX, foundY, pixelX, hpPosY, pixelX, hpPosY, hpColor, 50, Fast
 
-    if (color != hpColor) {
+    If (ErrorLevel) {
         Send, %Hotkey_Use%
         Sleep, 200
     }

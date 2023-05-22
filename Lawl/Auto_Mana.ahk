@@ -20,9 +20,9 @@ mpWidth := MP_Bar_Width
 Loop
 {
     pixelX := mpPosX + (MP_Bar_Width * MP_Percent / 100)
-    PixelGetColor, color, %pixelX%, %mpPosY%
+    PixelSearch, foundX, foundY, pixelX, mpPosY, pixelX, mpPosY, mpColor, 50, Fast
 
-    if (color != mpColor) {
+    If (ErrorLevel) {
         Send, %Hotkey_Use%
         Sleep, 200
     }
