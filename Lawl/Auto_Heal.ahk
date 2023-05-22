@@ -12,7 +12,7 @@ SetMouseDelay, -1
 
 hpPosX := 20
 hpPosY := 50
-hpWidth := 535
+hpWidth := 520
 noHpColor := 0x0A0B0D
 
 Loop
