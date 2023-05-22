@@ -33,5 +33,5 @@ Loop
         }
     }
 
-    Sleep, 100
+    Sleep, 1000
 }
