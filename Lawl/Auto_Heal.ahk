@@ -1,5 +1,5 @@
 ; Auto Heal
-; ATTENTION: Set HUD Transparency to 100% on "Options > Interface"
+; ATTENTION: "Options > Interface": set HUD size to MINIMUM and Transparency to 100%
 
 ; Settings
 Hotkey_Use    = {1}
@@ -13,28 +13,18 @@ HP_Bar_Width := 520
 SetMouseDelay, -1
 
 hpPosX := 20
-hpPosY := 50
+hpPosY := 48
+hpColor := 0x01018A
 hpWidth := HP_Bar_Width
 
 Loop
 {
-    iterations := (hpWidth / 10) + 1
+    pixelX := hpPosX + (HP_Bar_Width * HP_Percent / 100)
+    PixelGetColor, color, %pixelX%, %hpPosY%
 
-    Loop, % iterations
-    {
-        baseCalc := A_Index * 10
-        currentPosX := hpPosX + baseCalc
-        PixelGetColor, color, %currentPosX%, %hpPosY%
-
-        if (color == 0x0A0B0D || color == 0x0B0C0F) {
-            currentHpPercent := baseCalc / hpWidth * 100
-
-            if (currentHpPercent <= HP_Percent) {
-                Send, %Hotkey_Use%
-            }
-
-            Break
-        }
+    if (color != hpColor) {
+        Send, %Hotkey_Use%
+        Sleep, 200
     }
 
     Sleep, 200

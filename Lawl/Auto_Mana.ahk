@@ -1,5 +1,5 @@
 ; Auto Mana
-; ATTENTION: Set HUD Transparency to 100% on "Options > Interface"
+; ATTENTION: "Options > Interface": set HUD size to MINIMUM and Transparency to 100%
 
 ; Settings
 Hotkey_Use    = {2}
@@ -14,27 +14,17 @@ SetMouseDelay, -1
 
 mpPosX := 20
 mpPosY := 75
+mpColor := 0xA80415
 mpWidth := MP_Bar_Width
 
 Loop
 {
-    iterations := (mpWidth / 10) + 1
+    pixelX := mpPosX + (MP_Bar_Width * MP_Percent / 100)
+    PixelGetColor, color, %pixelX%, %mpPosY%
 
-    Loop, % iterations
-    {
-        baseCalc := A_Index * 10
-        currentPosX := baseCalc + mpPosX
-        PixelGetColor, color, %currentPosX%, %mpPosY%
-
-        if (color == 0x0A0B0D || color == 0x0B0C0F) {
-            currentMpPercent := baseCalc / mpWidth * 100
-
-            if (currentMpPercent <= MP_Percent) {
-                Send, %Hotkey_Use%
-            }
-
-            Break
-        }
+    if (color != mpColor) {
+        Send, %Hotkey_Use%
+        Sleep, 200
     }
 
     Sleep, 200
