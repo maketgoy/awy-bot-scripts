@@ -1,8 +1,10 @@
 ; Cast Mana
+; ATTENTION: Set HUD Transparency to 100% on "Options > Interface"
 
 ; Settings
-MP_Percent := 100
-Hotkey_Use = {3}
+Hotkey_Use    = {3}
+MP_Percent   := 100
+MP_Bar_Width := 500
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -12,8 +14,7 @@ SetMouseDelay, -1
 
 mpPosX := 20
 mpPosY := 75
-mpWidth := 500
-noMpColor := 0x0A0B0D
+mpWidth := MP_Percent
 
 Loop
 {
@@ -25,7 +26,7 @@ Loop
         currentPosX := baseCalc + mpPosX
         PixelGetColor, color, %currentPosX%, %mpPosY%
 
-        if (color == noMpColor) {
+        if (color == 0x0A0B0D || color == 0x0B0C0F) {
             currentMpPercent := baseCalc / mpWidth * 100
 
             if (currentMpPercent >= MP_Percent) {
