@@ -17,13 +17,16 @@ noMpColor := 0x0A0B0D
 
 Loop
 {
-    Loop, % mpWidth
+    iterations := (mpWidth / 10) + 1
+
+    Loop, % iterations
     {
-        currentPosX := A_Index + mpPosX
+        baseCalc := A_Index * 10
+        currentPosX := baseCalc + mpPosX
         PixelGetColor, color, %currentPosX%, %mpPosY%
 
         if (color == noMpColor) {
-            currentMpPercent := A_Index / mpWidth * 100
+            currentMpPercent := baseCalc / mpWidth * 100
 
             if (currentMpPercent <= MP_Percent) {
                 Send, %Hotkey_Use%
@@ -33,5 +36,5 @@ Loop
         }
     }
 
-    Sleep, 200
+    Sleep, 100
 }

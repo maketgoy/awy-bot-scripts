@@ -17,13 +17,16 @@ noHpColor := 0x0A0B0D
 
 Loop
 {
-    Loop, % hpWidth
+    iterations := (hpWidth / 10) + 1
+
+    Loop, % iterations
     {
-        currentPosX := A_Index + hpPosX
+        baseCalc := A_Index * 10
+        currentPosX := hpPosX + baseCalc
         PixelGetColor, color, %currentPosX%, %hpPosY%
 
         if (color == noHpColor) {
-            currentHpPercent := A_Index / hpWidth * 100
+            currentHpPercent := baseCalc / hpWidth * 100
 
             if (currentHpPercent <= HP_Percent) {
                 Send, %Hotkey_Use%
@@ -33,5 +36,5 @@ Loop
         }
     }
 
-    Sleep, 200
+    Sleep, 100
 }
