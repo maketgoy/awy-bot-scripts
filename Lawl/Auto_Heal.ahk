@@ -1,4 +1,4 @@
-; Auto Heal
+; Auto Heal ; READ PLEASE
 ; ATTENTION: "Options > Interface": set HUD size to MINIMUM and Transparency to 100%
 
 ; Settings
@@ -9,8 +9,6 @@ HP_Bar_Width := 520
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
-
-SetMouseDelay, -1
 
 menuIcon := GetFile("Lawl\Icons\menu.png")
 

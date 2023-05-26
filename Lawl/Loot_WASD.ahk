@@ -1,4 +1,4 @@
-; Loot walking on WASD
+; Auto loot when walking with WASD
 
 ; Settings
 Hotkey_Use = {Tab}

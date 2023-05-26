@@ -1,4 +1,4 @@
-; Auto Mana
+; Auto Mana ; READ PLEASE
 ; ATTENTION: "Options > Interface": set HUD size to MINIMUM and Transparency to 100%
 
 ; Settings
@@ -9,8 +9,6 @@ MP_Bar_Width := 500
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
-
-SetMouseDelay, -1
 
 menuIcon := GetFile("Lawl\Icons\menu.png")
 
