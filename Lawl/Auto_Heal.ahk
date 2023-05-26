@@ -4,33 +4,85 @@
 ; Settings
 Hotkey_Use    = {1}
 HP_Percent   := 30
-HP_Bar_Width := 520
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-menuIcon := GetFile("Lawl\Icons\menu.png")
+global barPosX := -1
+global barPosY := -1
+global barWidth := -1
+global lastWidthCheck := -1
+global lastHeightCheck := -1
 
-hpPosX := 20
-hpPosY := 48
-hpColor := 0x01018A
-hpWidth := HP_Bar_Width
+SetTimer, CheckBar, 500
+SetTimer, Action, 200
+GoSub, CheckBar
+Return
 
-Loop
+CheckBar:
 {
-    Sleep, 200
+    currentBarPosX := -1
+    currentBarPosY := -1
+    currentBarWidth := -1
 
-    ImageSearch, menuX, menuY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %menuIcon%
-    If (ErrorLevel > 0) {
-        Continue
+    CoordMode, Pixel, Client
+    WinGetPos, X, Y, W, H, ahk_exe %WindowExe%
+    iterations := W / 2
+
+    ; Get bar pos Y
+    CoordMode, Pixel, Client
+    PixelSearch, foundX, foundY, 100, 0, 100, 20, 0x333A44, 10, Fast
+    currentBarPosY := foundY
+
+    Loop, %iterations%
+    {
+        CoordMode, Pixel, Client
+
+        CoordMode, Pixel, Client
+        PixelSearch, foundX, foundY, A_Index, currentBarPosY, A_Index, currentBarPosY, 0x333A44, 5, Fast
+
+        If (ErrorLevel == 0) {
+            If (currentBarPosX == -1) {
+                currentBarPosX := A_Index
+            }
+
+            currentBarWidth := A_Index - currentBarPosX
+        }
     }
 
-    pixelX := hpPosX + (HP_Bar_Width * HP_Percent / 100)
-    PixelSearch, foundX, foundY, pixelX, hpPosY, pixelX, hpPosY, hpColor, 50, Fast
+    barPosX := currentBarPosX
+    barPosY := currentBarPosY
+    barWidth := currentBarWidth
+    lastWidthCheck := W
+    lastHeightCheck := H
+
+    Return
+}
+
+Action:
+{
+    WinGetPos, X, Y, W, H, ahk_exe %WindowExe%
+
+    If (W != lastWidthCheck || H != lastHeightCheck) {
+        barWidth := -1
+    }
+
+    If (barWidth == -1) {
+        Return
+    }
+
+    pixelX := barPosX + (barWidth * HP_Percent / 100)
+    pixelY := barPosY
+
+    CoordMode, Pixel, Client
+    PixelSearch, foundX, foundY, pixelX, pixelY, pixelX, pixelY * 2, 0x010195, 50, Fast
+    ;Tooltip, barPosX %barPosX% | barPosY: %barPosY% | barWidth %barWidth% | foundX: %foundX% | foundY: %foundY%
 
     If (ErrorLevel) {
         Send, %Hotkey_Use%
-        Sleep, 200
+        Sleep, 800
     }
+
+    Return
 }
