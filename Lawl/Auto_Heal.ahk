@@ -9,11 +9,11 @@ Percent := 30
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-global barPosX := -1
-global barPosY := -1
-global barWidth := -1
-global lastWidthCheck := -1
-global lastHeightCheck := -1
+global barPosX := 0
+global barPosY := 0
+global barWidth := 0
+global lastWidthCheck := 0
+global lastHeightCheck := 0
 
 SetTimer, CheckBar, 500
 SetTimer, Action, 200
@@ -46,10 +46,10 @@ Action:
     WinGetPos, X, Y, W, H, ahk_exe %WindowExe%
 
     If (W != lastWidthCheck || H != lastHeightCheck) {
-        barWidth := -1
+        barWidth := 0
     }
 
-    If (barWidth == -1) {
+    If (barPosX <= 0 || barPosY <= 0 || barWidth <= 0) {
         Return
     }
 
