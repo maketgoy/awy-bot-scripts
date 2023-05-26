@@ -13,7 +13,7 @@ If (!A_IsAdmin) {
 IsAway := True
 Direction := "Down"
 
-SetTimer, AntiIdle, 200000
+SetTimer, AntiIdle, 60000
 Gosub, AntiIdle
 Return
 
