@@ -1,5 +1,7 @@
+; Auto order pokemon
+
 ; Settings
-Hotkey_Run = {MButton}
+Hotkey = {MButton}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -10,25 +12,25 @@ SetDefaultMouseSpeed, 0
 
 orderIcon := GetFile("PokePlanet\Icons\order.png")
 
-key := HotkeyClear(Hotkey_Run)
-Hotkey, ~$%key%, Action, On
+key := HotkeyClear(Hotkey)
+Hotkey, $%key%, Action, On
 Return
 
 Action:
 {
     ImageSearch, orderX, orderY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %orderIcon%
-    If (ErrorLevel != 0) {
+
+    If (ErrorLevel > 0) {
         Notify("Order icon not found.")
-        Sleep, 200
         Return
     }
 
-    MouseBackup()
+    MouseGetPos, posX, posY
     Click, %orderX%, %orderY%, Right
-    Sleep, 50
-    Click, %MouseBackupX%, %MouseBackupY%, Left
+    Sleep, 100
+    Click, %posX%, %posY%, Left
 
-    Sleep, 200
+    Sleep, 100
     Return
 }
 
