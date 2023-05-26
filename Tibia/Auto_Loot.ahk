@@ -1,6 +1,19 @@
+; Press a key to loot all SQM
+
+; Settings
+Hotkey   = {NumpadIns}
+SqmSize := A_ScreenHeight // 15
+
+;;;;;;;;;;;;;;;;;;;;;;;
+; DO NOT CHANGE BELOW ;
+;;;;;;;;;;;;;;;;;;;;;;;
+
 CenterX := 0
 CenterY := 0
-SqmSize := A_ScreenHeight // 15
+
+key := HotkeyClear(Hotkey)
+Hotkey, ~$%key%, Action, On
+Return
 
 ^+!RButton::
 {
@@ -9,8 +22,7 @@ SqmSize := A_ScreenHeight // 15
     Return
 }
 
-Numpad0::
-NumpadIns::
+Action:
 {
     If (CenterX <= 0 || CenterY <= 0) {
         Notify("First press CTRL + ALT + SHIFT + RIGHT CLICK to set character position.")
