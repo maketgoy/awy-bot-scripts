@@ -2,7 +2,7 @@
 ; ATTENTION: "Options > Interface": set HUD size to MINIMUM and Transparency to 100%
 
 ; Settings
-Hotkey   = {2}
+Hotkey  = {F7}
 Percent := 30
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -42,6 +42,7 @@ CheckBar:
 
 Action:
 {
+    CoordMode, Pixel, Client
     WinGetPos, X, Y, W, H, ahk_exe %WindowExe%
 
     If (W != lastWidthCheck || H != lastHeightCheck) {
@@ -57,6 +58,7 @@ Action:
 
     CoordMode, Pixel, Client
     PixelSearch, foundX, foundY, pixelX, pixelY, pixelX, pixelY * 2, 0xA80415, 50, Fast
+    ;Tooltip, barPosX %barPosX% | barPosY: %barPosY% | barWidth %barWidth% | foundX: %foundX% | foundY: %foundY%
 
     If (ErrorLevel) {
         Send, %Hotkey%
