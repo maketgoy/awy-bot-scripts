@@ -7,20 +7,10 @@ Hotkey_Use = {Tab}
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetTimer, Action, 200
+~w::
+~a::
+~s::
+~d::
+Send, %Hotkey_Use%
+Sleep 100
 Return
-
-Action:
-{
-    wPressed := GetKeyState("w", "P")
-    aPressed := GetKeyState("a", "P")
-    sPressed := GetKeyState("s", "P")
-    dPressed := GetKeyState("d", "P")
-
-    if (wPressed || aPressed || sPressed || dPressed) {
-        Send, %Hotkey_Use%
-        Sleep, 200
-    }
-
-    Return
-}
