@@ -1,3 +1,9 @@
+; Diagonal walk using combination of WASD
+
+;;;;;;;;;;;;;;;;;;;;;;;
+; DO NOT CHANGE BELOW ;
+;;;;;;;;;;;;;;;;;;;;;;;
+
 SetTimer, Movement, 100
 
 global lastKey := 0
