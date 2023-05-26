@@ -1,5 +1,9 @@
 ; Open/close chat using Enter button
 
+;;;;;;;;;;;;;;;;;;;;;;;
+; DO NOT CHANGE BELOW ;
+;;;;;;;;;;;;;;;;;;;;;;;
+
 menuIcon := GetFile("Lawl\Icons\menu.png")
 
 ~Enter::
