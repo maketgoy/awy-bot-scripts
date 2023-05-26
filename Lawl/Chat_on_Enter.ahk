@@ -7,7 +7,7 @@
 menuIcon := GetFile("Lawl\Icons\menu.png")
 
 ~Enter::
-Sleep, 100
+Sleep, 10
 
 ImageSearch, menuX, menuY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %menuIcon%
 If (ErrorLevel > 0) {
