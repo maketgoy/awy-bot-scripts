@@ -51,7 +51,7 @@ CheckBars:
 
     CoordMode, Pixel, Client
     PixelSearch, endX, endY, manaX, manaY, W / 2, manaY, 0x333A44, 10, Fast
-    mpBarWidth := endX - barPosX
+    mpBarWidth := endX - mpBarPosX
 
     lastWidthCheck := W
     lastHeightCheck := H
