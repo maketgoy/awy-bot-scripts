@@ -28,7 +28,7 @@ SetTimer, Action, 200
 GoSub, CheckBars
 Return
 
-CheckBar:
+CheckBars:
 {
     CoordMode, Pixel, Client
     WinGetPos, X, Y, W, H, ahk_exe %WindowExe%
