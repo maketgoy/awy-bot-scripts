@@ -1,9 +1,14 @@
-; Auto follow: SELECT COLOR
+; Auto follow: SELECT COLOR (party member color)
+; blue = LEADER
+; green = OTHER
+;
+; Auto loot if LootHotkey is not empty
 
 ; Settings
-FollowPartyColor = green
+FollowColor = blue
 SqmDistance := 3
 SqmSize := 78
+LootHotkey = {Tab}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -17,10 +22,20 @@ If (!A_IsAdmin) {
     MsgBox, Auto_Follow: Run Awy Bot has Administrator
 }
 
-partyIcon := GetFile("Lawl\Icons\party_" FollowPartyColor ".png")
+partyIcon := GetFile("Lawl\Icons\party_" FollowColor ".png")
+
+If (LootHotkey) {
+    SetTimer, AutoLoot, 100
+}
 
 SetTimer, CheckPosition, 250
 Return
+
+AutoLoot:
+{
+    Send, %LootHotkey%
+    Return
+}
 
 CheckPosition:
 {
