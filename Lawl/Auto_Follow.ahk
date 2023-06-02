@@ -47,7 +47,13 @@ CheckPosition:
     leaderDiffX := diffX < 0 ? (diffX + SqmDistance) : (diffX - SqmDistance)
     leaderDiffY := diffY < 0 ? (diffY + SqmDistance) : (diffY - SqmDistance)
 
-    If (diffX != 0) {
+    ;Tooltip, diffX: %diffX% | diffY: %diffY% | leaderDiffX: %leaderDiffX% | leaderDiffY: %leaderDiffY%
+
+    If (leaderDiffX == 0 || leaderDiffY == 0) {
+        Return
+    }
+
+    If (leaderDiffX != 0) {
         ; Move Left
         If (leaderDiffX < 0) {
             Send {Left down}
@@ -63,7 +69,7 @@ CheckPosition:
         }
     }
 
-    If (diffY != 0) {
+    If (leaderDiffY != 0) {
         ; Move Up
         If (leaderDiffY < 0) {
             Send {Up down}
@@ -78,9 +84,6 @@ CheckPosition:
             Send {Down up}
         }
     }
-
-    ;Tooltip, diffX: %diffX% | leaderOnRightDiff: %leaderOnRightDiff% | leaderOnLeftDiff %leaderOnLeftDiff%
-    ;Tooltip, diffX: %diffX% | leaderDiff: %leaderDiff%
 
     Return
 }
