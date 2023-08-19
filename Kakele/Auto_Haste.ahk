@@ -1,4 +1,4 @@
-; Heal paralyze status with an hotkey
+; Auto Haste
 Hotkey_Spell = {r}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
