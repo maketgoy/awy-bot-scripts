@@ -5,8 +5,6 @@ Hotkey_Spell = {k}
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetMouseDelay, -1
-
 buttonCloseIcon := GetFile("Kakele\Icons\button_close.png")
 statusPzIcon := GetFile("Kakele\Icons\status_pz.png")
 statusBattleIcon := GetFile("Kakele\Icons\status_battle.png")
