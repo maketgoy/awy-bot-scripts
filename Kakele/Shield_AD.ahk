@@ -1,4 +1,4 @@
-; Auto Haste
+; Auto shield AD when in battle
 Hotkey_Spell = {k}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -9,6 +9,7 @@ SetMouseDelay, -1
 
 buttonCloseIcon := GetFile("Kakele\Icons\button_close.png")
 statusPzIcon := GetFile("Kakele\Icons\status_pz.png")
+statusBattleIcon := GetFile("Kakele\Icons\status_battle.png")
 statusBuffIcon := GetFile("Kakele\Icons\status_shield_ad.png")
 
 SetTimer, Action, 1000
@@ -26,7 +27,12 @@ Action:
         Return
     }
 
-    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %statusHasteIcon%
+    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %statusBattleIcon%
+    If (ErrorLevel > 0) {
+        Return
+    }
+
+    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %statusBuffIcon%
     If (ErrorLevel == 0) {
         Return
     }

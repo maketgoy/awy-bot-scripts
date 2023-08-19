@@ -1,4 +1,4 @@
-; Auto Haste
+; Automatically heals paralyze
 Hotkey_Spell = {r}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
