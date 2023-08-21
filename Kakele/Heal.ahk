@@ -37,7 +37,7 @@ Action:
         Send, %HP_Hotkey%
     }
 
-    If (mpColor != 0x012DE7) {
+    If (mpColor != 0x012DE7 && mpColor != 0x57C2FF) {
         Send, %MP_Hotkey%
     }
 
