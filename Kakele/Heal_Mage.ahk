@@ -16,8 +16,6 @@ statusManaShieldIcon := GetFile("Kakele\Icons\status_mana_shield.png")
 
 global hasManaShield := false
 global barsWidth := 200
-global barsX := 0
-global barsY := 0
 global hpX := 0
 global hpY := 0
 global mpX := 0
@@ -38,18 +36,15 @@ CheckManaShield:
 
 CheckBars:
 {
-    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %barsIcon%
+    ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %barsIcon%
     If (ErrorLevel > 0) {
         Return
     }
 
-    barsX := foundX + 3
-    barsY := foundY
-
-    hpX := barsX + (barsWidth * HP_Percent / 100)
+    hpX := barsX + 3 + (barsWidth * HP_Percent / 100)
     hpY := barsY + 1
 
-    mpX := barsX + (barsWidth * MP_Percent / 100)
+    mpX := barsX + 3 + (barsWidth * MP_Percent / 100)
     mpY := barsY + 32
 
     Return
