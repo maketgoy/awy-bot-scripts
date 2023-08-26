@@ -4,16 +4,18 @@
 HP_Hotkey        = {1}
 MP_Hotkey        = {2}
 Sacrifice_Hotkey = {e}
-HP_Percent      := 80
-MP_Percent      := 60
+HP_Percent      := 60
+MP_Percent      := 80
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 barsIcon := GetFile("Kakele\Icons\hp_mp_bars.png")
+buttonCloseIcon := GetFile("Kakele\Icons\button_close.png")
 statusManaShieldIcon := GetFile("Kakele\Icons\status_mana_shield.png")
 
+global hasOpenedMenu := false
 global hasManaShield := false
 global barsWidth := 200
 global hpX := 0
@@ -21,16 +23,20 @@ global hpY := 0
 global mpX := 0
 global mpY := 0
 
-SetTimer, CheckManaShield, 1000
 SetTimer, CheckBars, 5000
-SetTimer, Action, 200
+SetTimer, CheckStatus, 500
+SetTimer, Action, 100
 GoSub, CheckBars
 Return
 
-CheckManaShield:
+CheckStatus:
 {
-    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %statusManaShieldIcon%
+    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %statusManaShieldIcon%
     hasManaShield := ErrorLevel == 0
+
+    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %buttonCloseIcon%
+    hasOpenedMenu := ErrorLevel == 0
+
     Return
 }
 
@@ -52,8 +58,14 @@ CheckBars:
 
 Action:
 {
+    If (hasOpenedMenu) {
+        Return
+    }
+
     PixelGetColor, hpColor, hpX, hpY, RGB
     PixelGetColor, mpColor, mpX, mpY, RGB
+
+    wait := false
 
     ; Health Color 0xE80000
     ; Mana Color 0x012DE7
@@ -61,6 +73,7 @@ Action:
 
     If (hpColor != 0xE80000) {
         Send, %HP_Hotkey%
+        wait := true
     }
 
     If (mpColor != 0x012DE7 && mpColor != 0x57C2FF) {
@@ -69,6 +82,12 @@ Action:
         } Else {
             Send, %MP_Hotkey%
         }
+
+        wait := true
+    }
+
+    If (wait) {
+        Sleep, 500
     }
 
     Return
