@@ -14,10 +14,6 @@
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-#InstallKeybdHook
-#UseHook
-Return
-
 Numpad0::
 Chat("/mute all")
 Return

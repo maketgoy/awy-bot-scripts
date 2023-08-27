@@ -6,9 +6,7 @@
 
 SetKeyDelay, 1, 1
 
-If (!A_IsAdmin) {
-    MsgBox, Anti_Idle: Run Awy Bot has Administrator
-}
+AdminRequired()
 
 IsAway := True
 Direction := "Down"

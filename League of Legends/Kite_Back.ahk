@@ -10,8 +10,6 @@ Multiplier := 0.625
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 #MaxThreads 20
-#InstallKeybdHook
-#UseHook
 
 Process, Priority, , A
 SetKeyDelay, 10, -1

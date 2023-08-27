@@ -14,13 +14,7 @@ LootHotkey = {Tab}
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-#UseHook
-#InstallMouseHook
-#InstallKeybdHook
-
-If (!A_IsAdmin) {
-    MsgBox, Auto_Follow: Run Awy Bot has Administrator
-}
+AdminRequired()
 
 partyIcon := GetFile("Lawl\Icons\party_" FollowColor ".png")
 

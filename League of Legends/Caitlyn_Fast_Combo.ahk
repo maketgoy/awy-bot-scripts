@@ -5,12 +5,7 @@ Hotkey_Run = z
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-#InstallKeybdHook
-#UseHook
-
-If (!A_IsAdmin) {
-    MsgBox, Caitlyn_Fast_Combo: Run Awy Bot has Administrator
-}
+AdminRequired()
 
 Process, Priority, , A
 

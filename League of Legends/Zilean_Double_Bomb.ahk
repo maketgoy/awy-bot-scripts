@@ -5,12 +5,7 @@ Hotkey = z
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-#InstallKeybdHook
-#UseHook
-
-If (!A_IsAdmin) {
-    MsgBox, Zilean_Double_Bomb: Run Awy Bot has Administrator
-}
+AdminRequired()
 
 Process, Priority, , A
 SetKeyDelay, -1
