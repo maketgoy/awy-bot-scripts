@@ -5,20 +5,41 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 isActive := false
+isRunning := false
 
 SetTimer, Action, 1000
 Return
 
+~w::
+~a::
+~s::
+~d::
+~t::
+{
+    isActive := false
+    Return
+}
+
+~t::
+{
+    isActive := !isActive
+    Return
+}
+
 Action:
 {
-    If (GetKeyState("ScrollLock", "T")) {
-        isActive := true
-        Send {LShift down}
-        Send {w down}
-    } Else If (isActive) {
-        isActive := false
-        Send {LShift up}
-        Send {w up}
+    If (isActive) {
+        If (!isRunning) {
+            isRunning := true
+            Send {LShift down}
+            Send {w down}
+        }
+    } Else {
+        If (isRunning) {
+            isRunning := false
+            Send {LShift up}
+            Send {w up}
+        }
     }
 
     Return
