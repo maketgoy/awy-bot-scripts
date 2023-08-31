@@ -14,7 +14,6 @@ Return
 ~a::
 ~s::
 ~d::
-~t::
 {
     isActive := false
     Return
