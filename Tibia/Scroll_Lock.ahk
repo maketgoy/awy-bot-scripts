@@ -14,7 +14,7 @@ Return
 Action:
 {
     If (GetKeyState("ScrollLock", "T")) {
-        Send, %Hotkey_Spell%
+        Send, %Hotkey_Use%
     }
 
     Return
