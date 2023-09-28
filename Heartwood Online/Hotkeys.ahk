@@ -1,27 +1,50 @@
-; Custom hotkeys
+; Custom hotkeys with auto open/close chat
 
-; Settings
+; Hotkeys
 Spell_1 = {q}
 Spell_2 = {f}
 Spell_3 = {e}
 Spell_4 = {r}
 Map = {CapsLock}
 Inventory = {Tab}
-Chat = {Enter}
+
+; Settings
+ChatControl := true
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+SetMouseDelay, -1
+
 chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 
-Hotkey, % "$" HotkeyClear(Spell_1), ActionSpell1, On
-Hotkey, % "$" HotkeyClear(Spell_2), ActionSpell2, On
-Hotkey, % "$" HotkeyClear(Spell_3), ActionSpell3, On
-Hotkey, % "$" HotkeyClear(Spell_4), ActionSpell4, On
-Hotkey, % "$" HotkeyClear(Map), ActionMap, On
-Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, On
-Hotkey, % "$" HotkeyClear(Chat), ActionChat, On
+isChatOpen := false
+chatInputX := 0
+chatInputY := 0
+
+Hotkey, $Enter, ActionChat, On
+
+SetTimer, CheckHotkeys, 200
+Return
+
+CheckHotkeys:
+{
+    ImageSearch, chatInputX, chatInputY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %chatIcon%
+    isChatOpen := ErrorLevel == 0
+
+    state := isChatOpen ? "Off" : "On"
+
+    Hotkey, % "$" HotkeyClear(Spell_1), ActionSpell1, %state%
+    Hotkey, % "$" HotkeyClear(Spell_2), ActionSpell2, %state%
+    Hotkey, % "$" HotkeyClear(Spell_3), ActionSpell3, %state%
+    Hotkey, % "$" HotkeyClear(Spell_4), ActionSpell4, %state%
+    Hotkey, % "$" HotkeyClear(Map), ActionMap, %state%
+    Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, %state%
+
+    Return
+}
+
 Return
 
 ActionSpell1:
@@ -49,10 +72,21 @@ Send, {i}
 Return
 
 ActionChat:
-ImageSearch, chatX, chatY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransWhite %chatIcon%
-If (ErrorLevel > 0) {
+If (!ChatControl) {
+    Send, {Enter}
+    Return
+}
+If (isChatOpen) {
+    MouseBackup()
+    MouseClick, left, % chatInputX + 100, %chatInputY%
+    Sleep, 10
+    Send, {Enter}
+    Sleep, 10
+    Send, {c}
+    MouseRestore()
+} Else {
     Send, {c}
     Sleep, 50
+    Send, {Enter}
 }
-Send, {Enter}
 Return
