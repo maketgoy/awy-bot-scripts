@@ -15,7 +15,7 @@ healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
 Gap     := 120
 CenterX := (A_ScreenWidth  / 2)
-CenterY := (A_ScreenHeight / 2) - 66
+CenterY := (A_ScreenHeight / 2) - 33
 FromX   := CenterX - Gap
 ToX     := CenterX + Gap
 FromY   := CenterY - Gap
