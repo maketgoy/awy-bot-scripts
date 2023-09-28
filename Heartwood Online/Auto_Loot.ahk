@@ -12,7 +12,7 @@ AutoUseDelay := 0
 SetMouseDelay, -1
 
 ClickCount := 10
-ClickGap   := 20
+ClickGap   := 30
 CenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
 CenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
 
