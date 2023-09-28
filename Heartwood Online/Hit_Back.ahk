@@ -1,7 +1,6 @@
 ; Auto hit back enemies
 
 ; Settings
-ExtraHits     := 2
 UseSpells     := true
 CheckChatOpen := true
 
@@ -13,8 +12,6 @@ SetMouseDelay, -1
 
 chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
-
-extraHitsLeft := 0
 
 Gap     := 120
 CenterX := (A_ScreenWidth  / 2)
@@ -37,13 +34,7 @@ SearchEnemy:
     }
 
     ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthIcon%
-    enemyFound := ErrorLevel == 0
-
-    If (enemyFound) {
-        extraHitsLeft := ExtraHits
-    }
-
-    If (enemyFound || extraHitsLeft) {
+    If (ErrorLevel == 0) {
         MouseClick, left, % enemyX + 33, % enemyY + 66, 1, 0
 
         If (UseSpells) {
@@ -55,8 +46,6 @@ SearchEnemy:
             Sleep, 10
             Send, {4}
         }
-
-        extraHitsLeft -= 1
     }
 
     Return
