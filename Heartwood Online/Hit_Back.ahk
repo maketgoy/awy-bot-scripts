@@ -12,7 +12,7 @@ SetMouseDelay, -1
 chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
-Gap   := 100
+Gap   := 120
 FromX := (A_ScreenWidth  / 2) - Gap
 ToX   := (A_ScreenWidth  / 2) + Gap
 FromY := (A_ScreenHeight / 2) - Gap
