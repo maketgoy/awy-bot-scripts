@@ -1,7 +1,9 @@
 ; Press a key to loot all around
+; Set AutoUseDelay to 0 to disable auto use
 
 ; Settings
-Hotkey = {x}
+Hotkey       = {x}
+AutoUseDelay := 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -13,6 +15,10 @@ ClickCount := 10
 ClickGap   := 20
 CenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
 CenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
+
+If (AutoUseDelay) {
+    SetTimer, Action, %AutoUseDelay%
+}
 
 Hotkey, % "$" HotkeyClear(Hotkey), Action, On
 Return
