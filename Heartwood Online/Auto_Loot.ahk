@@ -2,7 +2,7 @@
 ; Set AutoUseDelay to 0 to disable auto use
 
 ; Settings
-Hotkey       = {x}
+Hotkey        = {x}
 AutoUseDelay := 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,8 +11,8 @@ AutoUseDelay := 0
 
 SetMouseDelay, -1
 
-ClickCount := 10
-ClickGap   := 30
+ClickCount := 12
+ClickGap   := 20
 CenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
 CenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
 

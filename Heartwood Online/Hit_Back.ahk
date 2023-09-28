@@ -1,6 +1,7 @@
 ; Auto hit back enemies
 
 ; Settings
+Toggle_On_Off  = {XButton2}
 UseSpells     := true
 CheckChatOpen := true
 
@@ -13,6 +14,8 @@ SetMouseDelay, -1
 chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
+isPaused := false
+
 Gap     := 120
 CenterX := (A_ScreenWidth  / 2)
 CenterY := (A_ScreenHeight / 2) - 33
@@ -21,8 +24,27 @@ ToX     := CenterX + Gap
 FromY   := CenterY - Gap
 ToY     := CenterY + Gap
 
+Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
+
 SetTimer, SearchEnemy, 100
 Return
+
+Pause_Resume:
+{
+    isPaused := !isPaused
+
+    If (isPaused) {
+        SetTimer, SearchEnemy, Off
+        SetOverlay("OFF")
+    } Else {
+        SetTimer, SearchEnemy, 100
+        SetOverlay("ON")
+    }
+
+    Notify(isPaused ? "Paused" : "Resumed")
+
+    Return
+}
 
 SearchEnemy:
 {
