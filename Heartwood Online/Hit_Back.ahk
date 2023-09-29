@@ -67,7 +67,6 @@ CheckMovement:
     If (wPressed || aPressed || sPressed || dPressed) {
         walkingTime += 1000
     } Else {
-        Sleep, 1000
         walkingTime := 0
     }
 
