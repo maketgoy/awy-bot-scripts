@@ -5,6 +5,7 @@ Toggle_On_Off = {XButton2}
 UseSpells    := true
 AutoLoot     := true
 WalkDelay    := 800
+StandDelay   := 400
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -67,7 +68,7 @@ CheckMovement:
     dPressed := GetKeyState("d", "P")
 
     If (wPressed || aPressed || sPressed || dPressed) {
-        walkingTime := Min(walkingTime + 100, WalkDelay)
+        walkingTime := Min(walkingTime + 100, WalkDelay + StandDelay)
     } Else {
         walkingTime := Max(walkingTime - 100, 0)
     }
