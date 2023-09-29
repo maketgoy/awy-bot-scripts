@@ -22,7 +22,7 @@ isAllKilled := true
 
 ; Enemies
 Gap     := 120
-CenterX := (A_ScreenWidth  / 2)
+CenterX := (A_ScreenWidth / 2)
 CenterY := (A_ScreenHeight / 2) - 33
 FromX   := CenterX - Gap
 ToX     := CenterX + Gap
@@ -32,8 +32,8 @@ ToY     := CenterY + Gap
 ; Auto Loot
 ClickCount := 12
 ClickGap   := 20
-CenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
-CenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
+LootCenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
+LootCenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
 
 Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 
@@ -102,18 +102,18 @@ SearchEnemy:
         If (AutoLoot) {
             Loop, %ClickCount%
             {
-                posY := CenterY + (A_Index - 1) * ClickGap
+                posY := LootCenterY + (A_Index - 1) * ClickGap
 
                 Loop, %ClickCount%
                 {
-                    posX := CenterX + (A_Index - 1) * ClickGap
+                    posX := LootCenterX + (A_Index - 1) * ClickGap
 
                     MouseClick, left, posX, posY, 1, 0
                 }
             }
         }
 
-        MouseMove, 0, 0, 0
+        MouseMove, CenterX, 0, 0
     }
 
     Return
