@@ -30,14 +30,6 @@ Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 SetTimer, SearchEnemy, 100
 SetTimer, CheckMovement, 1000
 
-;$w::
-;$a::
-;$s::
-;$d::
-;{
-;    walkingTime
-;}
-
 Return
 
 Pause_Resume:
