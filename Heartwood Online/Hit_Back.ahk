@@ -1,4 +1,4 @@
-; Auto hit back enemies
+; Auto hit back enemies, use spells and loot
 
 ; Settings
 Toggle_On_Off = {XButton2}
