@@ -1,9 +1,9 @@
 ; Auto hit back enemies
 
 ; Settings
-Toggle_On_Off  = {XButton2}
-UseSpells     := true
-CheckChatOpen := true
+Toggle_On_Off = {XButton2}
+WalkDelay    := 500
+UseSpells    := true
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -57,9 +57,9 @@ CheckMovement:
     dPressed := GetKeyState("d", "P")
 
     If (wPressed || aPressed || sPressed || dPressed) {
-        walkingTime := walkingTime >= 2000 ? 2000 : (walkingTime + 100)
+        walkingTime := Min(walkingTime + 100, WalkDelay)
     } Else {
-        walkingTime := walkingTime <= 0 ? 0 : (walkingTime - 100)
+        walkingTime := Max(walkingTime - 100, 0)
     }
 
     Return
@@ -67,15 +67,8 @@ CheckMovement:
 
 SearchEnemy:
 {
-    If (walkingTime >= 1000) {
+    If (walkingTime >= WalkDelay) {
         Return
-    }
-
-    If (CheckChatOpen) {
-        ImageSearch, chatInputX, chatInputY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransWhite %chatIcon%
-        If (ErrorLevel == 0) {
-            Return
-        }
     }
 
     ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthIcon%
