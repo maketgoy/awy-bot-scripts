@@ -16,6 +16,7 @@ healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
 isPaused := false
 walkingTime := 0
+isAllKilled := true
 
 Gap     := 120
 CenterX := (A_ScreenWidth  / 2)
@@ -72,7 +73,9 @@ SearchEnemy:
     }
 
     ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthIcon%
+
     If (ErrorLevel == 0) {
+        isAllKilled := false
         MouseClick, left, % enemyX + 33, % enemyY + 66, 1, 0
 
         If (UseSpells) {
@@ -84,6 +87,9 @@ SearchEnemy:
             Sleep, 10
             Send, {4}
         }
+    } Else If (!isAllKilled) {
+        isAllKilled := true
+        MouseMove, 0, 0, 0
     }
 
     Return
