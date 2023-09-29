@@ -4,7 +4,7 @@
 Toggle_On_Off = {XButton2}
 UseSpells    := true
 AutoLoot     := true
-WalkDelay    := 500
+WalkDelay    := 800
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
