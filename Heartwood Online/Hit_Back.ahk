@@ -28,7 +28,7 @@ ToY     := CenterY + Gap
 Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 
 SetTimer, SearchEnemy, 100
-SetTimer, CheckMovement, 1000
+SetTimer, CheckMovement, 100
 
 Return
 
@@ -57,9 +57,9 @@ CheckMovement:
     dPressed := GetKeyState("d", "P")
 
     If (wPressed || aPressed || sPressed || dPressed) {
-        walkingTime += 1000
+        walkingTime := walkingTime >= 2000 ? 2000 : (walkingTime + 100)
     } Else {
-        walkingTime := 0
+        walkingTime := walkingTime <= 0 ? 0 : (walkingTime - 100)
     }
 
     Return
@@ -67,7 +67,7 @@ CheckMovement:
 
 SearchEnemy:
 {
-    If (walkingTime >= 2000) {
+    If (walkingTime >= 1000) {
         Return
     }
 
