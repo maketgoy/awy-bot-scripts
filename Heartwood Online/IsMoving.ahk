@@ -33,7 +33,7 @@ CheckMovement:
     }
 
     IsMoving := walkingTime >= WalkDelay
-    SetOverlay(IsMoving ? "TRUE" : "FALSE", "IsMovig", "Status")
+    ;SetOverlay(IsMoving ? "TRUE" : "FALSE", "IsMovig", "Status")
 
     Return
 }
