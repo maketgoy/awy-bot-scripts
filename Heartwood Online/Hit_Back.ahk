@@ -100,8 +100,6 @@ SearchEnemy:
         isAllKilled := true
 
         If (AutoLoot) {
-            Sleep, 100
-
             Loop, %ClickCount%
             {
                 posY := CenterY + (A_Index - 1) * ClickGap
