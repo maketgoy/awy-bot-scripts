@@ -2,8 +2,9 @@
 
 ; Settings
 Toggle_On_Off = {XButton2}
-WalkDelay    := 500
 UseSpells    := true
+AutoLoot     := true
+WalkDelay    := 500
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -14,10 +15,12 @@ SetMouseDelay, -1
 chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
+; Conditions
 isPaused := false
 walkingTime := 0
 isAllKilled := true
 
+; Enemies
 Gap     := 120
 CenterX := (A_ScreenWidth  / 2)
 CenterY := (A_ScreenHeight / 2) - 33
@@ -25,6 +28,12 @@ FromX   := CenterX - Gap
 ToX     := CenterX + Gap
 FromY   := CenterY - Gap
 ToY     := CenterY + Gap
+
+; Auto Loot
+ClickCount := 12
+ClickGap   := 20
+CenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
+CenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
 
 Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 
@@ -89,6 +98,23 @@ SearchEnemy:
         }
     } Else If (!isAllKilled) {
         isAllKilled := true
+
+        If (AutoLoot) {
+            Sleep, 100
+
+            Loop, %ClickCount%
+            {
+                posY := CenterY + (A_Index - 1) * ClickGap
+
+                Loop, %ClickCount%
+                {
+                    posX := CenterX + (A_Index - 1) * ClickGap
+
+                    MouseClick, left, posX, posY, 1, 0
+                }
+            }
+        }
+
         MouseMove, 0, 0, 0
     }
 
