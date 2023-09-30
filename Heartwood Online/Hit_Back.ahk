@@ -2,7 +2,7 @@
 
 ; Settings
 Toggle_On_Off = {XButton2}
-UseSpells    := true
+UseSpells    := [2, 3]
 AutoLoot     := true
 WalkDelay    := 800
 StandDelay   := 400
@@ -87,14 +87,10 @@ SearchEnemy:
         isAllKilled := false
         MouseClick, left, % enemyX + 33, % enemyY + 100, 1, 0
 
-        If (UseSpells) {
-            Send, {1}
-            Sleep, 10
-            Send, {2}
-            Sleep, 10
-            Send, {3}
-            Sleep, 10
-            Send, {4}
+        For key, hotkey in UseSpells
+        {
+            Sleep, 20
+            Send, {%hotkey%}
         }
     } Else If (!isAllKilled) {
         isAllKilled := true

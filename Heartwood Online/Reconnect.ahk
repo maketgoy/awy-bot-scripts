@@ -32,7 +32,7 @@ ReconnectAction:
         MouseClick, left, buttonX, buttonY, 1, 0
     }
 
-     For key, btnIcon in btnReconnectIcons
+    For key, btnIcon in btnReconnectIcons
     {
         ImageSearch, buttonX, buttonY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransWhite %btnIcon%
 
