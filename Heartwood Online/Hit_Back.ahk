@@ -13,7 +13,6 @@ StandDelay   := 400
 
 SetMouseDelay, -1
 
-chatIcon := GetFile("Heartwood Online\Icons\chat_open.png")
 healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 
 ; Conditions
