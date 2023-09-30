@@ -99,7 +99,15 @@ SearchEnemy:
         }
     } Else If (!isAllKilled) {
         isAllKilled := true
+        SetTimer, AfterKillAll, 200
+    }
 
+    Return
+}
+
+AfterKillAll:
+{
+    If (walkingTime < WalkDelay) {
         If (AutoLoot) {
             Loop, %ClickCount%
             {
@@ -117,5 +125,6 @@ SearchEnemy:
         MouseMove, CenterX, 0, 0
     }
 
+    SetTimer, AfterKillAll, Off
     Return
 }
