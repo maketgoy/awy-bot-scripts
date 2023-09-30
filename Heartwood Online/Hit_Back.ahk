@@ -24,7 +24,7 @@ isAllKilled := true
 ; Enemies
 Gap     := 120
 CenterX := (A_ScreenWidth / 2)
-CenterY := (A_ScreenHeight / 2) - 33
+CenterY := (A_ScreenHeight / 2) - 50
 FromX   := CenterX - Gap
 ToX     := CenterX + Gap
 FromY   := CenterY - Gap
@@ -86,7 +86,7 @@ SearchEnemy:
 
     If (ErrorLevel == 0) {
         isAllKilled := false
-        MouseClick, left, % enemyX + 33, % enemyY + 66, 1, 0
+        MouseClick, left, % enemyX + 33, % enemyY + 100, 1, 0
 
         If (UseSpells) {
             Send, {1}
