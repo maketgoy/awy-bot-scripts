@@ -12,18 +12,23 @@ SetKeyDelay, -1
 
 cardIcon := GetFile("League of Legends\Icons\twisted_fate_card_yellow.png")
 
-Hotkey, $%Hotkey%, PickCard, On
+Hotkey, $%Hotkey%, EnableToggle, On
 Return
+
+EnableToggle:
+{
+    Send, {w}
+    SetTimer, PickCard, 200
+    Return
+}
 
 PickCard:
 {
-    Loop, 10
-    {
-        ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %cardIcon%
-        If (ErrorLevel = 0) {
-            Send, {w}
-            Break
-        }
+    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %cardIcon%
+
+    If (ErrorLevel = 0) {
+        Send, {w}
+        SetTimer, PickCard, Off
     }
 
     Return
