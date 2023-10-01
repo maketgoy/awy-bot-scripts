@@ -30,7 +30,7 @@ FromY   := CenterY - Gap
 ToY     := CenterY + Gap
 
 ; Auto Loot
-ClickCount := 10
+ClickCount := 12
 ClickGap   := 20
 LootCenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
 LootCenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
