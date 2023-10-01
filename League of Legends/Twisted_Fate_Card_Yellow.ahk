@@ -17,9 +17,13 @@ Return
 
 PickCard:
 {
-    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %cardIcon%
-    If (ErrorLevel = 0) {
-        Send, {w}
+    Loop, 10
+    {
+        ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %cardIcon%
+        If (ErrorLevel = 0) {
+            Send, {w}
+            Break
+        }
     }
 
     Return
