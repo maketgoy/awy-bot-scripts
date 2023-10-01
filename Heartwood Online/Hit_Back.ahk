@@ -30,7 +30,7 @@ FromY   := CenterY - Gap
 ToY     := CenterY + Gap
 
 ; Auto Loot
-ClickCount := 12
+ClickCount := 10
 ClickGap   := 20
 LootCenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
 LootCenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
@@ -94,7 +94,7 @@ SearchEnemy:
         }
     } Else If (!isAllKilled) {
         isAllKilled := true
-        SetTimer, AfterKillAll, 200
+        SetTimer, AfterKillAll, -200
     }
 
     Return
@@ -102,24 +102,32 @@ SearchEnemy:
 
 AfterKillAll:
 {
-    If (walkingTime < WalkDelay) {
-        If (AutoLoot) {
-            Loop, %ClickCount%
-            {
-                posY := LootCenterY + (A_Index - 1) * ClickGap
-
-                Loop, %ClickCount%
-                {
-                    posX := LootCenterX + (A_Index - 1) * ClickGap
-
-                    MouseClick, left, posX, posY, 1, 0
-                }
-            }
-        }
-
-        MouseMove, CenterX, 0, 0
+    If (walkingTime >= WalkDelay) {
+        Return
     }
 
-    SetTimer, AfterKillAll, Off
+    If (AutoLoot) {
+        Loop, %ClickCount%
+        {
+            posY := LootCenterY + (A_Index - 1) * ClickGap
+
+            Loop, %ClickCount%
+            {
+                If (walkingTime >= WalkDelay) {
+                    Return
+                }
+
+                If (!isAllKilled) {
+                    Return
+                }
+
+                posX := LootCenterX + (A_Index - 1) * ClickGap
+                MouseClick, left, posX, posY, 1, 0
+            }
+        }
+    }
+
+    MouseMove, CenterX, 0, 0
+
     Return
 }
