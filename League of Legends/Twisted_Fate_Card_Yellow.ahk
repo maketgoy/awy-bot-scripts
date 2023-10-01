@@ -18,7 +18,7 @@ Return
 EnableToggle:
 {
     Send, {w}
-    SetTimer, PickCard, 200
+    SetTimer, PickCard, 100
     Return
 }
 
