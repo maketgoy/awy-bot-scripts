@@ -96,12 +96,9 @@ SearchEnemy:
 
 AfterKillAll:
 {
-    If (walkingTime >= WalkDelay) {
-        Return
-    }
-
     If (AutoLoot) {
-        Sleep, 50
+        Send, {e}
+        Send, {e}
         Send, {e}
     }
 
