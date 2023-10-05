@@ -29,12 +29,6 @@ ToX     := CenterX + Gap
 FromY   := CenterY - Gap
 ToY     := CenterY + Gap
 
-; Auto Loot
-ClickCount := 12
-ClickGap   := 20
-LootCenterX := (A_ScreenWidth / 2) - (ClickCount / 2 * ClickGap)
-LootCenterY := (A_ScreenHeight / 2) - (ClickCount / 2 * ClickGap)
-
 Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 
 SetTimer, SearchEnemy, 100
@@ -107,24 +101,8 @@ AfterKillAll:
     }
 
     If (AutoLoot) {
-        Loop, %ClickCount%
-        {
-            posY := LootCenterY + (A_Index - 1) * ClickGap
-
-            Loop, %ClickCount%
-            {
-                If (walkingTime >= WalkDelay) {
-                    Return
-                }
-
-                If (!isAllKilled) {
-                    Return
-                }
-
-                posX := LootCenterX + (A_Index - 1) * ClickGap
-                MouseClick, left, posX, posY, 1, 0
-            }
-        }
+        Sleep, 50
+        Send, {e}
     }
 
     MouseMove, CenterX, 0, 0
