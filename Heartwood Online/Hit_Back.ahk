@@ -2,8 +2,11 @@
 
 ; Settings
 Toggle_On_Off = {XButton2}
-UseSpells    := [2, 3]
+AutoAttack   := true
+AttackRed    := true
+AttackYellow := true
 AutoLoot     := true
+UseSpells    := [2, 3]
 WalkDelay    := 800
 StandDelay   := 400
 
@@ -13,7 +16,8 @@ StandDelay   := 400
 
 SetMouseDelay, -1
 
-healthIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
+healthRedIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
+healthYellowIcon := GetFile("Heartwood Online\Icons\health_enemy_yellow.png")
 
 ; Conditions
 isPaused := false
@@ -75,34 +79,49 @@ SearchEnemy:
         Return
     }
 
-    ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthIcon%
+    If (!AttackRed && !AttackYellow) {
+        Return
+    }
+
+    If (AttackRed) {
+        ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthRedIcon%
+    }
+
+    If (AttackYellow && (ErrorLevel > 0 || !AttackRed)) {
+        ImageSearch, enemyX, enemyY, FromX, FromY, ToX, ToY, *TransWhite %healthYellowIcon%
+    }
 
     If (ErrorLevel == 0) {
         isAllKilled := false
-        MouseClick, left, % enemyX + 33, % enemyY + 100, 1, 0
+
+        If (AutoAttack) {
+            MouseClick, left, % enemyX + 33, % enemyY + 100, 1, 0
+        }
 
         For key, hotkey in UseSpells
         {
             Sleep, 20
             Send, {%hotkey%}
         }
-    } Else If (!isAllKilled) {
-        isAllKilled := true
-        SetTimer, AfterKillAll, -200
+    } Else {
+        SetTimer, LootItems, -200
+
+        If (!isAllKilled) {
+            isAllKilled := true
+
+            If (AutoAttack && walkingTime < WalkDelay) {
+                MouseMove, CenterX, 0, 0
+            }
+        }
     }
 
     Return
 }
 
-AfterKillAll:
+LootItems:
 {
-    If (AutoLoot) {
-        Send, {e}
-        Send, {e}
-        Send, {e}
-    }
-
-    MouseMove, CenterX, 0, 0
-
+    Send, {e}
+    Send, {e}
+    Send, {e}
     Return
 }
