@@ -104,10 +104,12 @@ SearchEnemy:
             Send, {%hotkey%}
         }
     } Else {
-        SetTimer, LootItems, -200
-
         If (!isAllKilled) {
             isAllKilled := true
+
+            If (AutoLoot) {
+                SetTimer, LootItems, -100
+            }
 
             If (AutoAttack && walkingTime < WalkDelay) {
                 MouseMove, CenterX, 0, 0
@@ -120,8 +122,15 @@ SearchEnemy:
 
 LootItems:
 {
-    Send, {e}
-    Send, {e}
-    Send, {e}
+    Loop, 3
+    {
+        Loop, 5
+        {
+            Send, {e}
+        }
+
+        Sleep 200
+    }
+
     Return
 }
