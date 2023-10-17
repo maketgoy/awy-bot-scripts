@@ -98,6 +98,10 @@ SearchEnemy:
             MouseClick, left, % enemyX + 33, % enemyY + 100, 1, 0
         }
 
+        If (AutoLoot) {
+            Send, {e}
+        }
+
         For key, hotkey in UseSpells
         {
             Sleep, 20
