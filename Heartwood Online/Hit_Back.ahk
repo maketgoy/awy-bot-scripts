@@ -143,7 +143,7 @@ LootItems:
 
 CheckButtonNeed:
 {
-    ImageSearch, buttonX, buttonY, FromX, FromY, ToX, ToY, *TransWhite %lootNeedIcon%
+    ImageSearch, buttonX, buttonY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransWhite %lootNeedIcon%
 
     If (ErrorLevel == 0) {
         MouseClick, left, %buttonX%, %buttonY%, 1, 0
