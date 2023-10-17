@@ -18,6 +18,7 @@ SetMouseDelay, -1
 
 healthRedIcon := GetFile("Heartwood Online\Icons\health_enemy.png")
 healthYellowIcon := GetFile("Heartwood Online\Icons\health_enemy_yellow.png")
+lootNeedIcon := GetFile("Heartwood Online\Icons\button_need.png")
 
 ; Conditions
 isPaused := false
@@ -37,6 +38,7 @@ Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
 
 SetTimer, SearchEnemy, 100
 SetTimer, CheckMovement, 100
+SetTimer, CheckButtonNeed, 1000
 
 Return
 
@@ -134,6 +136,17 @@ LootItems:
         }
 
         Sleep 200
+    }
+
+    Return
+}
+
+CheckButtonNeed:
+{
+    ImageSearch, buttonX, buttonY, FromX, FromY, ToX, ToY, *TransWhite %lootNeedIcon%
+
+    If (ErrorLevel == 0) {
+        MouseClick, left, %buttonX%, %buttonY%, 1, 0
     }
 
     Return
