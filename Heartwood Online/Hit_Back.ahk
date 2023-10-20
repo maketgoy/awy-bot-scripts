@@ -7,8 +7,7 @@ AttackRed    := true
 AttackYellow := true
 AutoLoot     := true
 UseSpells    := [2, 3]
-WalkDelay    := 800
-StandDelay   := 400
+StandDelay   := 500
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -22,8 +21,9 @@ lootNeedIcon := GetFile("Heartwood Online\Icons\button_need.png")
 
 ; Conditions
 isPaused := false
-walkingTime := 0
 isAllKilled := true
+isWalking := false
+walkingTime := 0
 
 ; Enemies
 Gap     := 120
@@ -34,30 +34,13 @@ ToX     := CenterX + Gap
 FromY   := CenterY - Gap
 ToY     := CenterY + Gap
 
-Hotkey, % "$" HotkeyClear(Toggle_On_Off), Pause_Resume, On
+Hotkey, % "$" HotkeyClear(Toggle_On_Off), ActionPauseResume, On
 
 SetTimer, SearchEnemy, 100
 SetTimer, CheckMovement, 100
-SetTimer, CheckButtonNeed, 1000
+SetTimer, CheckButtonLootNeed, 1000
 
 Return
-
-Pause_Resume:
-{
-    isPaused := !isPaused
-
-    If (isPaused) {
-        SetTimer, SearchEnemy, Off
-        SetOverlay("OFF")
-    } Else {
-        SetTimer, SearchEnemy, 100
-        SetOverlay("ON")
-    }
-
-    Notify(isPaused ? "Paused" : "Resumed")
-
-    Return
-}
 
 CheckMovement:
 {
@@ -67,17 +50,31 @@ CheckMovement:
     dPressed := GetKeyState("d", "P")
 
     If (wPressed || aPressed || sPressed || dPressed) {
-        walkingTime := Min(walkingTime + 100, WalkDelay + StandDelay)
+        walkingTime := Min(walkingTime + 100, StandDelay * 2)
     } Else {
         walkingTime := Max(walkingTime - 100, 0)
+    }
+
+    isWalking := walkingTime > StandDelay
+
+    Return
+}
+
+CheckButtonLootNeed:
+{
+    ImageSearch, buttonX, buttonY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransWhite %lootNeedIcon%
+
+    If (ErrorLevel == 0) {
+        MouseClick, left, %buttonX%, %buttonY%, 1, 0
     }
 
     Return
 }
 
+
 SearchEnemy:
 {
-    If (walkingTime >= WalkDelay) {
+    If (isWalking) {
         Return
     }
 
@@ -104,50 +101,59 @@ SearchEnemy:
             Send, {e}
         }
 
-        For key, hotkey in UseSpells
-        {
-            Sleep, 20
-            Send, {%hotkey%}
+        SetTimer, ActionCastSpells, -1
+    } Else If (!isAllKilled) {
+        isAllKilled := true
+
+        If (AutoLoot) {
+            SetTimer, ActionLootItems, -1
         }
-    } Else {
-        If (!isAllKilled) {
-            isAllKilled := true
 
-            If (AutoLoot) {
-                SetTimer, LootItems, -100
-            }
-
-            If (AutoAttack && walkingTime < WalkDelay) {
-                MouseMove, CenterX, 0, 0
-            }
+        If (AutoAttack && !isWalking) {
+            MouseMove, CenterX, 0, 0
         }
     }
 
     Return
 }
 
-LootItems:
+ActionCastSpells:
 {
-    Loop, 3
+    Random, randomIndex, 1, % UseSpells.MaxIndex()
+    hotkey := UseSpells[randomIndex]
+
+    If (!isWalking && !isAllKilled) {
+        Sleep, 100
+        Send, {%hotkey%}
+    }
+
+    Return
+}
+
+ActionLootItems:
+{
+    Loop, 5
     {
-        Loop, 5
-        {
-            Send, {e}
-        }
-
         Sleep 200
+        Send, {e}
     }
 
     Return
 }
 
-CheckButtonNeed:
+ActionPauseResume:
 {
-    ImageSearch, buttonX, buttonY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransWhite %lootNeedIcon%
+    isPaused := !isPaused
 
-    If (ErrorLevel == 0) {
-        MouseClick, left, %buttonX%, %buttonY%, 1, 0
+    If (isPaused) {
+        SetTimer, SearchEnemy, Off
+        SetOverlay("OFF")
+    } Else {
+        SetTimer, SearchEnemy, 100
+        SetOverlay("ON")
     }
+
+    Notify(isPaused ? "Paused" : "Resumed")
 
     Return
 }
