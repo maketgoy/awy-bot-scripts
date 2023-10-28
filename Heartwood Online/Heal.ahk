@@ -21,10 +21,12 @@ Return
 
 HealAction:
 {
-    PixelGetColor, hpColor, hpCheckX, hpCheckY, RGB
+    If (hpCheckX > 0 && hpCheckY > 0) {
+        PixelGetColor, hpColor, hpCheckX, hpCheckY, RGB
 
-    If (hpColor != "0xE20C0C" && hpColor != "0xB41111") {
-        Send, %Hotkey%
+        If (hpColor != "0xE20C0C" && hpColor != "0xB41111") {
+            Send, %Hotkey%
+        }
     }
 
     Return
