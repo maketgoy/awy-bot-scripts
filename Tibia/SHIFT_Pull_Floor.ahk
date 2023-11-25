@@ -1,4 +1,4 @@
-; Press CTRL + NumArrows to "use" the relative SQM floor
+; Press SHIFT + NumArrows to pull the relative SQM floor into character positions
 ; You may get positions using "Get_Positions" script
 
 ; Settings
