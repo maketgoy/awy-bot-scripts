@@ -24,88 +24,79 @@ PosYDec := CharPosY - SqmSize
 {
     MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXDec%, %PosYInc%} ;1
-    Send {Esct}
+    Send {Click, %PosXDec%, %PosYInc%} ;Num1
     MouseRestore()
     Return
 }
 
 !NumpadClear::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %CharPosX%, %CharPosY%} ;5
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %CharPosX%, %CharPosY%} ;Num5
+    MouseRestore()
     Return
 }
 
 !NumpadDown::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %CharPosX%, %PosYInc%} ;2
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %CharPosX%, %PosYInc%} ;Num2
+    MouseRestore()
     Return
 }
 
 !NumpadPgdn::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXInc%, %PosYInc%} ;3
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %PosXInc%, %PosYInc%} ;Num3
+    MouseRestore()
     Return
 }
 
 !NumpadRight::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXInc%, %CharPosY%} ;6
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %PosXInc%, %CharPosY%} ;Num6
+    MouseRestore()
     Return
 }
 
 !NumpadPgup::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXInc%, %PosYDec%} ;9
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %PosXInc%, %PosYDec%} ;Num9
+    MouseRestore()
     Return
 }
 
 !NumpadUp::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %CharPosX%, %PosYDec%} ;8
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %CharPosX%, %PosYDec%} ;Num8
+    MouseRestore()
     Return
 }
 
 !NumpadHome::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXDec%, %PosYDec%} ;7
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %PosXDec%, %PosYDec%} ;Num7
+    MouseRestore()
     Return
 }
 
 !NumpadLeft::
 {
-	MouseBackup()
+    MouseBackup()
     Send %ItemHotkey%
-    Send {Click, %PosXDec%, %CharPosY%} ;4
-    Send {Esct}
-	MouseRestore()
+    Send {Click, %PosXDec%, %CharPosY%} ;Num4
+    MouseRestore()
     Return
 }
