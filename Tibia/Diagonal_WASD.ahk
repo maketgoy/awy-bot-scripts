@@ -26,6 +26,18 @@ Return
 
 Movement:
 {
+    If (GetKeyState("Ctrl", "P")) {
+        Return
+    }
+
+    If (GetKeyState("Alt", "P")) {
+        Return
+    }
+
+    If (GetKeyState("Shift", "P")) {
+        Return
+    }
+
     wPressed := GetKeyState("w", "P")
     aPressed := GetKeyState("a", "P")
     sPressed := GetKeyState("s", "P")
