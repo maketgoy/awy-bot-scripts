@@ -12,16 +12,20 @@ $w::
 $a::
 $s::
 $d::
-lastKey := StrReplace(A_ThisHotkey, "$", "")
+    key := StrReplace(A_ThisHotkey, "$", "")
+    If (!lastKey) {
+        Send, {%key%}
+    }
+    lastKey := key
 Return
 
 $w up::
 $a up::
 $s up::
 $d up::
-If (lastKey == StrReplace(StrReplace(A_ThisHotkey, "$", ""), " up", "")) {
-    lastKey := 0
-}
+    If (lastKey == StrReplace(StrReplace(A_ThisHotkey, "$", ""), " up", "")) {
+        lastKey := 0
+    }
 Return
 
 Movement:
