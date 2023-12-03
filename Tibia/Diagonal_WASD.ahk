@@ -4,18 +4,24 @@
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetTimer, Movement, 100
-
+global moving := false
 global lastKey := 0
+
+SetTimer, Movement, 100
+Return
 
 $w::
 $a::
 $s::
 $d::
     key := StrReplace(A_ThisHotkey, "$", "")
-    If (!lastKey) {
+
+    If (!moving) {
         Send, {%key%}
+        Sleep, 50
+        SetTimer, Movement, On
     }
+
     lastKey := key
 Return
 
@@ -30,15 +36,20 @@ Return
 
 Movement:
 {
+    moving := false
+
     If (GetKeyState("Ctrl", "P")) {
+        SetTimer, Movement, Off
         Return
     }
 
     If (GetKeyState("Alt", "P")) {
+        SetTimer, Movement, Off
         Return
     }
 
     If (GetKeyState("Shift", "P")) {
+        SetTimer, Movement, Off
         Return
     }
 
@@ -48,6 +59,7 @@ Movement:
     dPressed := GetKeyState("d", "P")
 
     If (!wPressed && !aPressed && !sPressed && !dPressed) {
+        SetTimer, Movement, Off
         Return
     }
 
@@ -74,7 +86,10 @@ Movement:
     }
 
     If (key) {
+        moving := true
         Send, {Blind}{%key%}
+    } Else {
+        SetTimer, Movement, Off
     }
 
     Return
