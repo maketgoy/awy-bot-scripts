@@ -15,15 +15,15 @@ Map       = {CapsLock}
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-Hotkey, % "$" HotkeyClear(Spell_1), ActionSpell1, %state%
-Hotkey, % "$" HotkeyClear(Spell_2), ActionSpell2, %state%
-Hotkey, % "$" HotkeyClear(Spell_3), ActionSpell3, %state%
-Hotkey, % "$" HotkeyClear(Spell_4), ActionSpell4, %state%
-Hotkey, % "$" HotkeyClear(Loot), ActionLoot, %state%
-Hotkey, % "$" HotkeyClear(Mount), ActionMount, %state%
-Hotkey, % "$" HotkeyClear(Teleport), ActionTeleport, %state%
-Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, %state%
-Hotkey, % "$" HotkeyClear(Map), ActionMap, %state%
+Hotkey, % "$" HotkeyClear(Spell_1), ActionSpell1, On
+Hotkey, % "$" HotkeyClear(Spell_2), ActionSpell2, On
+Hotkey, % "$" HotkeyClear(Spell_3), ActionSpell3, On
+Hotkey, % "$" HotkeyClear(Spell_4), ActionSpell4, On
+Hotkey, % "$" HotkeyClear(Loot), ActionLoot, On
+Hotkey, % "$" HotkeyClear(Mount), ActionMount, On
+Hotkey, % "$" HotkeyClear(Teleport), ActionTeleport, On
+Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, On
+Hotkey, % "$" HotkeyClear(Map), ActionMap, On
 Return
 
 ActionSpell1:
