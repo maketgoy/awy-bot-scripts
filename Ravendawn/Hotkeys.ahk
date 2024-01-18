@@ -1,33 +1,40 @@
 ; Custom hotkeys
 
 ; Settings
-Inventory  = {i}
-Map        = {m}
-Target     = {Tab}
-PartyFocus = {Space}
+Inventory  = {Tab}
+Map        = {CapsLock}
+Mount      = ^{r}
+PartyFocus = {F1}
+Target     = {Space}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, On
-Hotkey, % "$" HotkeyClear(Map), ActionMap, On
-Hotkey, % "$" HotkeyClear(Target), ActionTarget, On
-Hotkey, % "$" HotkeyClear(PartyFocus), ActionPartyFocus, On
+chatIcon := GetFile("Ravendawn\Icons\chat_open.png")
+
+RegisterKey(Inventory, "{i}")
+RegisterKey(Map, "{m}")
+RegisterKey(Mount, "^{r}")
+RegisterKey(PartyFocus, "{Space}")
+RegisterKey(Target, "{Tab}")
 Return
 
-ActionInventory:
-Send, {i}
-Return
+RegisterKey(PressedKey, TargetKey) {
+    If (PressedKey != TargetKey) {
+        Fn := Func("SendKey").bind(PressedKey, TargetKey)
+        Hotkey, % "$" HotkeyClear(PressedKey), %Fn%, On
+    }
+}
 
-ActionMap:
-Send, {m}
-Return
+SendKey(PressedKey, TargetKey) {
+    ; Check chat
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 *TransBlack %chatIcon%
 
-ActionTarget:
-Send, {Tab}
-Return
-
-ActionPartyFocus:
-Send, {Space}
-Return
+    ; Chat open
+    If (ErrorLevel == 0) {
+        Send, %PressedKey%
+    } Else {
+        Send, %TargetKey%
+    }
+}
