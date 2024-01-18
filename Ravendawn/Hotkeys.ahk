@@ -1,9 +1,10 @@
 ; Custom hotkeys
 
 ; Settings
-Inventory = {Tab}
-Map       = {CapsLock}
-Target    = {Space}
+Inventory  = {i}
+Map        = {m}
+Target     = {Tab}
+PartyFocus = {Space}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -12,6 +13,7 @@ Target    = {Space}
 Hotkey, % "$" HotkeyClear(Inventory), ActionInventory, On
 Hotkey, % "$" HotkeyClear(Map), ActionMap, On
 Hotkey, % "$" HotkeyClear(Target), ActionTarget, On
+Hotkey, % "$" HotkeyClear(PartyFocus), ActionPartyFocus, On
 Return
 
 ActionInventory:
@@ -24,4 +26,8 @@ Return
 
 ActionTarget:
 Send, {Tab}
+Return
+
+ActionPartyFocus:
+Send, {Space}
 Return
