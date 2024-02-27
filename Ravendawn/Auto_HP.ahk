@@ -1,4 +1,4 @@
-; Auto heal self HP
+; Auto heal self HP (only works with UI Scale: 100%)
 
 ; Settings
 Hotkey = {End}
