@@ -14,7 +14,6 @@ AdminRequired()
 Process, Priority, , A
 SetKeyDelay, -1
 
-skillIcon := GetFile("League of Legends\Icons\twisted_fate_w.png")
 yellowIcon := GetFile("League of Legends\Icons\twisted_fate_card_yellow.png")
 blueIcon := GetFile("League of Legends\Icons\twisted_fate_card_blue.png")
 redIcon := GetFile("League of Legends\Icons\twisted_fate_card_red.png")
@@ -33,35 +32,38 @@ If (Hotkey_Red) {
     Hotkey, $%Hotkey_Red%, PickRed, On
 }
 
-SetTimer, PickCard, 100
+~$w::
+  iconToPick := ""
+Return
 
 Return
 
 PickYellow:
+  Send, {w}
   iconToPick := yellowIcon
+  SetTimer, PickCard, 100
 Return
 
 PickBlue:
+  Send, {w}
   iconToPick := blueIcon
+  SetTimer, PickCard, 100
 Return
 
 PickRed:
+  Send, {w}
   iconToPick := redIcon
+  SetTimer, PickCard, 100
 Return
 
 PickCard:
 {
     If (!iconToPick) {
+        SetTimer, PickCard, Off
         Return
     }
 
-    ImageSearch, foundX, foundY, 0, A_ScreenHeight / 2, A_ScreenWidth, A_ScreenHeight, %skillIcon%
-
-    If (ErrorLevel = 0) {
-        Send, {w}
-    }
-
-    ImageSearch, foundX, foundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %iconToPick%
+    ImageSearch, foundX, foundY, 0, A_ScreenHeight / 2, A_ScreenWidth, A_ScreenHeight, %iconToPick%
 
     If (ErrorLevel = 0) {
         Send, {w}
@@ -70,4 +72,5 @@ PickCard:
 
     Return
 }
+
 
