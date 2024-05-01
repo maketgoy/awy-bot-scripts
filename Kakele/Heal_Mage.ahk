@@ -67,17 +67,16 @@ Action:
 
     wait := false
 
-    ; Health Color 0xE80000
-    ; Mana Color 0x012DE7
-    ; Mana Shield Color 0x57C2FF
+    ; NO FILLED HP BAR COLOR 0x101520
+    ; NO FILLED MP BAR COLOR 0x121924
 
-    If (hpColor != 0xE80000) {
+    If (hpColor == 0x101520) {
         Send, %HP_Hotkey%
         wait := true
     }
 
-    If (mpColor != 0x012DE7 && mpColor != 0x57C2FF) {
-        If (hasManaShield && hpColor == 0xE80000) {
+    If (mpColor == 0x121924) {
+        If (hasManaShield && hpColor != 0x101520) {
             Send, %Sacrifice_Hotkey%
         } Else {
             Send, %MP_Hotkey%
