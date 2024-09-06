@@ -1,4 +1,4 @@
-; Eat food every 60 seconds. Does not eat on Protect Zones.
+; Auto eat food. Does not eat on Protect Zones.
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -7,6 +7,7 @@
 SetMouseDelay, -1
 
 pzIcon := GetFile("Medivia\Icons\Status\protect.png")
+hungryIcon := GetFile("Medivia\Icons\Status\hungry.png")
 
 icons := [ GetFile("Medivia\Icons\Food\brown_mushroom.png")
     , GetFile("Medivia\Icons\Food\green_mushroom.png")
@@ -31,7 +32,7 @@ icons := [ GetFile("Medivia\Icons\Food\brown_mushroom.png")
     , GetFile("Medivia\Icons\Food\orange.png")
     , GetFile("Medivia\Icons\Food\roll.png") ]
 
-SetTimer, UseItem, 60000
+SetTimer, UseItem, 2000
 Gosub, UseItem
 Return
 
@@ -45,6 +46,11 @@ UseItem:
         Return
     }
 
+    ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %hungryIcon%
+    If (ErrorLevel > 0) {
+        Return
+    }
+
     For key, icon in icons
     {
         ImageSearch, iconX, iconY, 0, 0, A_ScreenWidth, A_ScreenHeight, *25 *TransWhite %icon%
@@ -52,13 +58,8 @@ UseItem:
             Continue
         }
 
-        If (!itemY || iconY < itemY) {
-            itemX := iconX
-            itemY := iconY
-        } Else If (iconY == itemY && iconX < itemX) {
-            itemX := iconX
-            itemY := iconY
-        }
+        itemX := iconX
+        itemY := iconY
     }
 
     If (!itemX || !itemY) {
