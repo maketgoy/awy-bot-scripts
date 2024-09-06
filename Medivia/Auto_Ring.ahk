@@ -1,6 +1,7 @@
-; Set the right ring name below
+; Set the right ring name and hotkey below
 ; Settings
-Ring := "Ring of Healing"
+Ring  := "Ring of Healing"
+Hotkey = {F12}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -37,18 +38,7 @@ AutoRing:
         Return
     }
 
-    ImageSearch, ringX, ringY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %ringIcon%
-
-    If (ErrorLevel = 1) {
-        Notify(Ring " not found")
-        Return
-    }
-
-    MouseLock()
-    MouseBackup()
-    MouseClickDrag, left, ringX, ringY, slotX, slotY, 0
-    MouseRestore()
-    MouseRelease()
+    Send, %Hotkey%
 
     Return
 }
