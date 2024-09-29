@@ -1,6 +1,6 @@
 ; Aim target on Battle List
 
-Hotkey = {F1}
+Hotkey = {f}
 CheckChat := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -8,13 +8,12 @@ CheckChat := True
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 chatIcon := GetFile("Elderan Online\Icons\Mixin\chat_on.png")
-redboxIcon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
 battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
-
-global isChatOn := False
+redbox1Icon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
+redbox2Icon := GetFile("Elderan Online\Icons\Mixin\redbox2.png")
 
 If CheckChat {
-    SetTimer, CheckChatAction, 500
+    SetTimer, CheckChatAction, 200
 }
 
 #If !isChatOn
@@ -35,8 +34,23 @@ AimTargetAction:
         Return
     }
 
-    ImageSearch, targetX, targetY, battleX - 10, battleY + 40, battleX + 150, A_ScreenHeight, *TransBlack %redboxIcon%
-    If ErrorLevel {
+    redboxFound := False
+
+    If !redboxFound {
+        ImageSearch, targetX, targetY, battleX - 10, battleY + 40, battleX + 150, A_ScreenHeight, *TransBlack %redbox1Icon%
+        If !ErrorLevel {
+            redboxFound := True
+        }
+    }
+
+    If !redboxFound {
+        ImageSearch, targetX, targetY, battleX - 10, battleY + 40, battleX + 150, A_ScreenHeight, *TransBlack %redbox2Icon%
+        If !ErrorLevel {
+            redboxFound := True
+        }
+    }
+
+    If !redBoxFound {
         Return
     }
 
