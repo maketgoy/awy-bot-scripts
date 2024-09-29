@@ -1,10 +1,11 @@
 ; Heal HP and MP
+; Leave percent 0 to disable each one
 
 ; Settings
 HP_Percent := 60
-HP_Hotkey   = {F5}
+HP_Hotkey   = {F1}
 MP_Percent := 30
-MP_Hotkey   = {F6}
+MP_Hotkey   = {F2}
 CheckChat  := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -20,7 +21,7 @@ global hpY := 0
 global mpX := 0
 global mpY := 0
 
-SetTimer, CheckBarsActions, 2000
+SetTimer, CheckBarsActions, 5000
 SetTimer, AutoHealAction, 100
 GoSub, CheckBarsActions
 Return

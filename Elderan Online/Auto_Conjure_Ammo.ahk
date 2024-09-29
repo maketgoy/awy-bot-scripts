@@ -1,6 +1,6 @@
 ; Auto target creatures on Battle List
 
-Hotkey = {F11}
+Hotkey = {F1}
 CheckChat := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
