@@ -11,18 +11,25 @@ chatIcon := GetFile("Elderan Online\Icons\Mixin\chat_on.png")
 redboxIcon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
 battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
 
-Hotkey, % "$" HotkeyClear(Hotkey), AimTarget, On
+global isChatOn := False
+
+If CheckChat {
+    SetTimer, CheckChatAction, 500
+}
+
+#If !isChatOn
+Hotkey, % "$" HotkeyClear(Hotkey), AimTargetAction, On
 Return
 
-AimTarget:
+CheckChatAction:
 {
-    If CheckChat {
-        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %chatIcon%
-        If !ErrorLevel {
-            Return
-        }
-    }
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %chatIcon%
+    isChatOn := !ErrorLevel
+    Return
+}
 
+AimTargetAction:
+{
     ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, %battleIcon%
     If ErrorLevel {
         Return
