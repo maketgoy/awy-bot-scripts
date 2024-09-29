@@ -7,7 +7,7 @@ CheckChat := True
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-chatIcon := GetFile("Elderan Online\Icons\Mixin\chat_on.png")
+inputIcon := GetFile("Elderan Online\Icons\Mixin\input.png")
 battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
 redbox1Icon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
 redbox2Icon := GetFile("Elderan Online\Icons\Mixin\redbox2.png")
@@ -22,7 +22,7 @@ Return
 
 CheckChatAction:
 {
-    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %chatIcon%
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %inputIcon%
     isChatOn := !ErrorLevel
     Return
 }
