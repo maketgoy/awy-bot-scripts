@@ -29,7 +29,7 @@ Return
 
 AutoLootAction:
 {
-    If (CharPosX <= 0 || CharPosY <= 0) {r
+    If (CharPosX <= 0 || CharPosY <= 0) {
         Notify("First press CTRL + ALT + SHIFT + RIGHT CLICK to set character position.")
         Return
     }
