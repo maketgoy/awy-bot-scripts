@@ -12,7 +12,7 @@ battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
 redbox1Icon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
 redbox2Icon := GetFile("Elderan Online\Icons\Mixin\redbox2.png")
 
-SetTimer, AutoTargetAction, 500
+SetTimer, AutoTargetAction, 1000
 Return
 
 AutoTargetAction:
