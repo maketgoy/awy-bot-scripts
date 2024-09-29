@@ -22,7 +22,7 @@ global mpX := 0
 global mpY := 0
 
 SetTimer, CheckBarsActions, 5000
-SetTimer, AutoHealAction, 100
+SetTimer, AutoHealAction, 500
 GoSub, CheckBarsActions
 Return
 
@@ -64,6 +64,4 @@ AutoHealAction:
             Send, %MP_Hotkey%
         }
     }
-
-    Sleep, 500
 }
