@@ -1,6 +1,6 @@
 ; Aim target on Battle List
 
-Hotkey = {f}
+Hotkey = {F1}
 CheckChat := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
