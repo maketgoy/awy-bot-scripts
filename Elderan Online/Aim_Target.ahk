@@ -12,25 +12,23 @@ battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
 redbox1Icon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
 redbox2Icon := GetFile("Elderan Online\Icons\Mixin\redbox2.png")
 
-If CheckChat {
-    SetTimer, CheckChatAction, 200
-}
-
-#If !isChatOn
 Hotkey, % "$" HotkeyClear(Hotkey), AimTargetAction, On
 Return
 
-CheckChatAction:
-{
-    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %inputIcon%
-    isChatOn := !ErrorLevel
-    Return
-}
-
 AimTargetAction:
 {
+    If CheckChat {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %inputIcon%
+        If !ErrorLevel {
+            Send, %Hotkey%
+            Sleep, 200
+            Return
+        }
+    }
+
     ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, %battleIcon%
     If ErrorLevel {
+        Sleep, 200
         Return
     }
 
@@ -51,16 +49,16 @@ AimTargetAction:
     }
 
     If !redBoxFound {
+        Sleep, 200
         Return
     }
 
     MouseBackup()
-
     Send, %Hotkey%
-    Sleep, 50
-    Click, %targetX% %targetY%
-
+    Sleep, 100
+    MouseClick, left, targetX, targetY
     MouseRestore()
 
+    Sleep, 200
     Return
 }
