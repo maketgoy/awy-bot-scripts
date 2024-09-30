@@ -26,5 +26,6 @@ TargetY := 0
         Notify("Please use CTRL + ALT + RIGHT CLICK to configure the target position.")
     }
 
+    Sleep, 50
     Return
 }

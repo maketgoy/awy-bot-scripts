@@ -5,8 +5,6 @@
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetMouseDelay, -1
-
 TargetX := 0
 TargetY := 0
 
@@ -21,14 +19,13 @@ TargetY := 0
 {
     If (TargetX > 0 && TargetY > 0)
     {
-        MouseLock()
         MouseBackup()
         MouseClickDrag, left, %StartX%, %StartY%, %TargetX%, %TargetY%, 0
         MouseRestore()
-        MouseRelease()
     } Else {
         Notify("Please use CTRL + ALT + RIGHT CLICK to configure the target position.")
     }
 
+    Sleep, 50
     Return
 }
