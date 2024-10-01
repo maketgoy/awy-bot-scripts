@@ -1,7 +1,7 @@
 ; Auto spend mana with %
 
 ; Settings
-Percent   := 50
+Percent   := 90
 Hotkey     = {F1}
 CheckChat := True
 
