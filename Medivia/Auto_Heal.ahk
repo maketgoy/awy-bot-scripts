@@ -1,12 +1,16 @@
 ; Heal HP and MP
-; Leave percent 0 to disable each one
+; You need to open "Health Info" window
+; All values are considered as PERCENTAGE
+; You can use HP or MP and combine both
 
 ; Settings
-HP_Percent := 60
-HP_Hotkey   = {F1}
-MP_Percent := 30
-MP_Hotkey   = {F2}
-CheckChat  := True
+CheckChat := True
+Healings  := [0
+    ,{ HP: "0-30", Hotkey: "{F3}" }
+    ,{ HP: "31-60", Hotkey: "{F2}" }
+    ,{ HP: "61-80", Hotkey: "{F1}" }
+    ,{ MP: "0-20", Hotkey: "{F4}" }
+,0]
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -16,10 +20,10 @@ barsIcon := GetFile("Medivia\Icons\Window\bars.png")
 inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 
 global barsWidth := 179
-global hpX := 0
-global hpY := 0
-global mpX := 0
-global mpY := 0
+global hpBarX := 0
+global hpBarY := 0
+global mpBarX := 0
+global mpBarY := 0
 
 SetTimer, CheckBarsActions, 5000
 SetTimer, AutoHealAction, 500
@@ -33,11 +37,11 @@ CheckBarsActions:
         Return
     }
 
-    hpX := barsX + (barsWidth * HP_Percent / 100)
-    hpY := barsY + 13
+    hpBarX := barsX
+    hpBarY := barsY + 13
 
-    mpX := barsX + (barsWidth * MP_Percent / 100)
-    mpY := barsY + 33
+    mpBarX := barsX
+    mpBarY := barsY + 33
 }
 
 AutoHealAction:
@@ -49,19 +53,50 @@ AutoHealAction:
         }
     }
 
-    If HP_Percent && HP_Hotkey && hpX && hpY {
-        PixelGetColor, hpColor, hpX, hpY, Fast RGB
-
-        If (hpColor != 0xF82D20) {
-            Send, %HP_Hotkey%
+    For index, item in Healings
+    {
+        If not IsObject(item) {
+            Continue
         }
+
+        If item.HP {
+            hpSplit := StrSplit(item.HP, "-")
+            hpGtrThan := 0 + (hpSplit.Length() == 2 ? hpSplit[1] : 0)
+            hpLowThan := 0 + (hpSplit.Length() == 2 ? hpSplit[2] : hpSplit[1])
+
+            hpGtrX := hpBarX + (barsWidth * hpGtrThan / 100)
+            PixelGetColor, hpColor, hpGtrX, hpBarY, Fast RGB
+            If (hpColor != 0xF82D20 && hpColor != 0xF72D20 && hpColor != 0xD7271C && hpColor != 0x2A1413 && hpColor != 0x3A0B08 && hpColor != 0x961B13) {
+                Continue
+            }
+
+            hpLowX := hpBarX + (barsWidth * hpLowThan / 100)
+            PixelGetColor, hpColor, hpLowX, hpBarY, Fast RGB
+            If (hpColor == 0xF82D20 || hpColor == 0xF72D20 || hpColor == 0xD7271C || hpColor == 0x2A1413 || hpColor == 0x3A0B08 || hpColor == 0x961B13) {
+                Continue
+            }
+        }
+
+        If item.MP {
+            mpSplit := StrSplit(item.MP, "-")
+            mpGtrThan := 0 + (mpSplit.Length() == 2 ? mpSplit[1] : 0)
+            mpLowThan := 0 + (mpSplit.Length() == 2 ? mpSplit[2] : mpSplit[1])
+
+            mpGtrX := mpBarX + (barsWidth * mpGtrThan / 100)
+            PixelGetColor, mpColor, mpGtrX, mpBarY, Fast RGB
+            If (mpColor != 0x6D2FFC && mpColor != 0x6D2FFB && mpColor != 0x5E29DA && mpColor != 0x1B152B && mpColor != 0x1A0C3B && mpColor != 0x421C98) {
+                Continue
+            }
+
+            mpLowX := mpBarX + (barsWidth * mpLowThan / 100)
+            PixelGetColor, mpColor, mpLowX, mpBarY, Fast RGB
+            If (mpColor == 0x6D2FFC || mpColor == 0x6D2FFB || mpColor == 0x5E29DA || mpColor == 0x1B152B || mpColor == 0x1A0C3B || mpColor == 0x421C98) {
+                Continue
+            }
+        }
+
+        Send, % item.Hotkey
     }
 
-    If MP_Percent && MP_Hotkey && mpX && mpY {
-        PixelGetColor, mpColor, mpX, mpY, Fast RGB
-
-        If (mpColor != 0x6D2FFC) {
-            Send, %MP_Hotkey%
-        }
-    }
+    Return
 }
