@@ -4,13 +4,13 @@
 ; ! is for ALT
 
 ; Settings
-Hotkey_Run = ^+{q}
+Hotkey = ^+{q}
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-key := HotkeyClear(Hotkey_Run)
+key := HotkeyClear(Hotkey)
 Hotkey, ~$%key%, Action, On
 Return
 

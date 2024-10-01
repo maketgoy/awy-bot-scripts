@@ -4,8 +4,6 @@
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetMouseDelay, -1
-
 pzIcon := GetFile("Medivia\Icons\Status\protect.png")
 hungryIcon := GetFile("Medivia\Icons\Status\hungry.png")
 
@@ -32,11 +30,11 @@ icons := [ GetFile("Medivia\Icons\Food\brown_mushroom.png")
     , GetFile("Medivia\Icons\Food\orange.png")
     , GetFile("Medivia\Icons\Food\roll.png") ]
 
-SetTimer, UseItem, 2000
-Gosub, UseItem
+SetTimer, EatFood, 2000
+Gosub, EatFood
 Return
 
-UseItem:
+EatFood:
 {
     itemX := False
     itemY := False
