@@ -1,50 +1,43 @@
-Hotkey_Spell = {F11}
+; Auto spend mana with %
+
+; Settings
+Percent   := 50
+Hotkey     = {F1}
+CheckChat := True
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-icon := GetFile("Medivia\Icons\life_window.png")
+barsIcon := GetFile("Medivia\Icons\Window\bars.png")
+inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 
-SetTimer, AutoRune, 2000
+SetTimer, TrainML, 1000
 Return
 
-AutoRune:
+TrainML:
 {
-    ImageSearch, iconX, iconY, 0, 0, %A_ScreenWidth%, %A_ScreenHeight%, *25 *TransWhite %icon%
+    If CheckChat {
+        ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %inputIcon%
+        If !ErrorLevel {
+            Return
+        }
+    }
 
-    If (ErrorLevel = 1) {
-        Notify("Open your life/mana panel.")
+    ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
+    If ErrorLevel {
         Return
     }
 
-    iniX := iconX
-    iniY := iconY + 26
-    endX := iniX + 160
-    endY := iniY + 18
+    barsWidth := 177
+    mpX := barsX + (barsWidth * Percent / 100)
+    mpY := barsY + 33
 
-    manaText := GetText(iniX, iniY, endX, endY)
-    slashPos := InStr(manaText, "/")
+    If Percent && Hotkey {
+        PixelGetColor, mpColor, mpX, mpY, Fast RGB
 
-    If (!slashPos) {
-        Return
+        If (mpColor == 0x6D2FFC || mpColor == 0x6D2FFB || mpColor == 0x5E29DA || mpColor == 0x1B152B || mpColor == 0x1A0C3B || mpColor == 0x421C98) {
+            Send, %Hotkey%
+        }
     }
-
-    currentMana := RegExReplace( SubStr(manaText, 1, slashPos), "[^\d]+" )
-    totalMana := RegExReplace( SubStr(manaText, slashPos), "[^\d]+" )
-
-    If (!currentMana) {
-        Return
-    }
-
-    percent := currentMana / totalMana * 100
-
-    If (percent < 90 || percent > 100) {
-        Return
-    }
-
-    ; Use spell
-    Send, %Hotkey_Spell%
-
-    Return
 }

@@ -21,12 +21,12 @@ global hpY := 0
 global mpX := 0
 global mpY := 0
 
-SetTimer, CheckBarsActions, 5000
+SetTimer, CheckBarsAction, 5000
 SetTimer, AutoHealAction, 500
-GoSub, CheckBarsActions
+GoSub, CheckBarsAction
 Return
 
-CheckBarsActions:
+CheckBarsAction:
 {
     ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
     If ErrorLevel {

@@ -23,7 +23,7 @@ AutoSpendManaAction:
             Return
         }
     }
-r
+
     ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
     If ErrorLevel {
         Return

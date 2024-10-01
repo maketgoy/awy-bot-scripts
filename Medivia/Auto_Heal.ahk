@@ -19,18 +19,18 @@ Healings  := [0
 barsIcon := GetFile("Medivia\Icons\Window\bars.png")
 inputIcon := GetFile("Medivia\Icons\Mixin\input.png")
 
-global barsWidth := 179
+global barsWidth := 177
 global hpBarX := 0
 global hpBarY := 0
 global mpBarX := 0
 global mpBarY := 0
 
-SetTimer, CheckBarsActions, 5000
+SetTimer, CheckBarsAction, 5000
 SetTimer, AutoHealAction, 500
-GoSub, CheckBarsActions
+GoSub, CheckBarsAction
 Return
 
-CheckBarsActions:
+CheckBarsAction:
 {
     ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
     If ErrorLevel {
