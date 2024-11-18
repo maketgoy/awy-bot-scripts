@@ -20,6 +20,7 @@ barsIcon := GetFile("Shadow Illusion\Icons\Mixin\bars.png")
 inputIcon := GetFile("Shadow Illusion\Icons\Mixin\input.png")
 
 global barsWidth := 177
+global barsFound := false
 global hpBarX := 0
 global hpBarY := 0
 global mpBarX := 0
@@ -32,16 +33,22 @@ Return
 
 CheckBarsAction:
 {
+    barsFound := false
+
     ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
     If ErrorLevel {
         Return
     }
 
-    hpBarX := barsX + 2
-    hpBarY := barsY + 2
+    If (barsX > 0 && barsY > 0) {
+        barsFound := true
 
-    mpBarX := barsX + 2
-    mpBarY := barsY + 19
+        hpBarX := barsX + 2
+        hpBarY := barsY + 2
+
+        mpBarX := barsX + 2
+        mpBarY := barsY + 19
+    }
 }
 
 AutoHealAction:
@@ -49,6 +56,10 @@ AutoHealAction:
     ; debug
     ;PixelGetColor, mpColor, mpBarX + 50, mpBarY, Fast RGB
     ;Tooltip, Color %mpColor%
+
+    If (!barsFound) {
+        Return
+    }
 
     If CheckChat {
         ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %inputIcon%
