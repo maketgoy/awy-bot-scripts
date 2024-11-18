@@ -10,7 +10,7 @@ battleIcon := GetFile("Medivia\Icons\Window\battle.png")
 redbox1Icon := GetFile("Medivia\Icons\Mixin\redbox.png")
 redbox2Icon := GetFile("Medivia\Icons\Mixin\redbox2.png")
 
-SetTimer, AutoTarget, 1000
+SetTimer, AutoTarget, 500
 Return
 
 AutoTarget:

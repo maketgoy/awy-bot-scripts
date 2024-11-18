@@ -7,10 +7,11 @@ CheckChat := True
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-inputIcon := GetFile("Elderan Online\Icons\Mixin\input.png")
-battleIcon := GetFile("Elderan Online\Icons\Window\battle.png")
-redbox1Icon := GetFile("Elderan Online\Icons\Mixin\redbox.png")
-redbox2Icon := GetFile("Elderan Online\Icons\Mixin\redbox2.png")
+pzIcon := GetFile("Shadow Illusion\Icons\Status\protect.png")
+inputIcon := GetFile("Shadow Illusion\Icons\Mixin\input.png")
+battleIcon := GetFile("Shadow Illusion\Icons\Window\battle.png")
+redbox1Icon := GetFile("Shadow Illusion\Icons\Mixin\redbox.png")
+redbox2Icon := GetFile("Shadow Illusion\Icons\Mixin\redbox2.png")
 
 SetTimer, AutoTargetAction, 500
 Return
@@ -22,6 +23,11 @@ AutoTargetAction:
         If !ErrorLevel {
             Return
         }
+    }
+
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %pzIcon%
+    If !ErrorLevel {
+        Return
     }
 
     ImageSearch, battleX, battleY, 0, 0, A_ScreenWidth, A_ScreenHeight, %battleIcon%
