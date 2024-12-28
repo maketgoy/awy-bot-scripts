@@ -8,6 +8,7 @@ global ShowDebug := False
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+global closeIcon := GetFile("Throne and Liberty\Icons\close.png")
 global partyIcon := GetFile("Throne and Liberty\Icons\party.png")
 global questionIcon := GetFile("Throne and Liberty\Icons\question.png")
 
@@ -40,6 +41,11 @@ isGreen(color) {
 }
 
 CheckMembers() {
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, %closeIcon%
+    If !ErrorLevel {
+        Return
+    }
+
     ImageSearch, partyX, partyY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %partyIcon%
     If ErrorLevel {
         Return
