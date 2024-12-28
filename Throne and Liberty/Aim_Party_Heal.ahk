@@ -87,7 +87,7 @@ CheckMembers() {
         Tooltip, %debug%
     }
 
-    Loop, 100
+    Loop, 95
     {
         xIndex := A_Index
         checkX := posX + A_Index
