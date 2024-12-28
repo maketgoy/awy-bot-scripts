@@ -9,13 +9,14 @@ global ShowDebug := False
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 global partyIcon := GetFile("Throne and Liberty\Icons\party.png")
+global questionIcon := GetFile("Throne and Liberty\Icons\question.png")
 
 global posX := 0
 global posY := 0
 global gap  := 44
 
 isGreen(color) {
-    tolerance := 40
+    tolerance := 50
 
     color1 := 0x5FD095 ; green
     color2 := color
@@ -44,12 +45,15 @@ CheckMembers() {
         Return
     }
 
+    ImageSearch, questionX, questionY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %questionIcon%
+    offsetY := (ErrorLevel) ? 39 : 42
+
     posX := partyX + 59
-    posY := partyY + 39
+    posY := partyY + offsetY
 
     membersFoundHks := []
 
-    debug := "Aim Party Heal Debug"
+    debug := "Aim Party Heal Debug`nX: " posX " | Y: " posY
 
     Loop, 6
     {
@@ -62,7 +66,7 @@ CheckMembers() {
         ; Member hp is not green
         PixelGetColor, firstColor, posX, checkY, Fast RGB
 
-        If (firstColor == 0x5FD095 || firstColor == 0x5DCC92) {
+        If (firstColor == 0x5FD095 || firstColor == 0x5DCC92 || firstColor == 0x54BE8A || firstColor == 0x5DCE92) {
             membersFoundHks[A_Index] := MemberFocusHotkeys[A_Index]
         } Else {
             membersFoundHks[A_Index] := false
@@ -94,11 +98,7 @@ CheckMembers() {
             PixelGetColor, hpColor, checkX, checkY, Fast RGB
 
             If (!isGreen(hpColor)) {
-                ;MsgBox, %hpColor%
-
-                ;Tooltip, Member: %memberIndex% | Hotkey: %memberHK%
                 Send, %memberHK%
-
                 Return
             }
         }
