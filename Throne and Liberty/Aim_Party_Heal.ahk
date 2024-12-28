@@ -91,7 +91,6 @@ CheckMembers() {
             memberIndex := A_Index
             checkY := posY + (gap * (memberIndex - 1))
 
-            MouseMove, checkX, checkY
             PixelGetColor, hpColor, checkX, checkY, Fast RGB
 
             If (!isGreen(hpColor)) {
