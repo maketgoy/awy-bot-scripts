@@ -35,7 +35,7 @@ CheckBarsAction:
 {
     barsFound := false
 
-    ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *TransBlack %barsIcon%
+    ImageSearch, barsX, barsY, 0, 0, A_ScreenWidth, A_ScreenHeight, *20 *TransBlack %barsIcon%
     If ErrorLevel {
         Return
     }
