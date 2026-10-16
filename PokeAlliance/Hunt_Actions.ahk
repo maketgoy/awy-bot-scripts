@@ -22,7 +22,7 @@ global isChatOn := false
 global isWindowOpen := false
 global hotkeysActive := true
 
-SetTimer, CheckIcons, 50
+SetTimer, CheckIcons, 100
 
 ; Ativa as hotkeys no início
 Hotkey, % HotkeyClear(ComboHotkey), OnCombo

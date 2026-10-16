@@ -15,7 +15,7 @@ global lastChatSeen := 0
 global isChatOn := false
 global isWindowOpen := false
 
-SetTimer, CheckIcons, 50
+SetTimer, CheckIcons, 100
 SetTimer, AutoLoot, 100
 Return
 
