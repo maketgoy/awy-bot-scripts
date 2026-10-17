@@ -1,7 +1,7 @@
 ; Auto loot when walking with WASD or Arrows
 
 ; Settings
-Hotkey_Loot := "E"
+Hotkey_Loot := "e"
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
