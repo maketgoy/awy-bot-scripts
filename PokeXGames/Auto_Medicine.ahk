@@ -9,12 +9,12 @@ Hotkey_Medicine := "F2"
 
 negativeStatusIcons := [ GetFile("PokeXGames\Icons\Status\Debuff\blind.png")
     , GetFile("PokeXGames\Icons\Status\Debuff\confusion.png")
+    , GetFile("PokeXGames\Icons\Status\Debuff\paralyze.png")
     ; TODO ADD:
     ; , GetFile("PokeXGames\Icons\Status\Debuff\fear.png")
-    ; , GetFile("PokeXGames\Icons\Status\Debuff\paralyze.png")
     ; , GetFile("PokeXGames\Icons\Status\Debuff\silence.png")
-    , GetFile("PokeXGames\Icons\Status\Debuff\stun.png")
-    , GetFile("PokeXGames\Icons\Status\Debuff\slow.png") ]
+    , GetFile("PokeXGames\Icons\Status\Debuff\slow.png")
+    , GetFile("PokeXGames\Icons\Status\Debuff\stun.png") ]
 
 SetTimer, CheckMedicine, 100
 Return
