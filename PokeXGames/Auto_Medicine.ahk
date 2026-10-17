@@ -22,11 +22,11 @@ Return
 ; Check negative status to medicine
 CheckMedicine:
     For index, iconPath in negativeStatusIcons {
-        ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *30 %iconPath%
+        ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %iconPath%
 
         If (ErrorLevel == 0) {
-            Send, %HK_MEDICINE%
-            Sleep, 500 ; Cooldown para o status sumir da tela antes da próxima checagem
+            Send, {%Hotkey_Medicine%}
+            Sleep, 250
             Break
         }
     }
