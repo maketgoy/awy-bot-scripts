@@ -1,7 +1,7 @@
 ; Auto loot when walking with WASD or Arrows
 
 ; Settings
-Hotkey_Loot := "X"
+Hotkey_Loot := "E"
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -32,7 +32,6 @@ CheckIcons:
 
     ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %inputFocusIcon%
     If (ErrorLevel == 0) {
-        Tooltip, InputFocus
         isSuspended := true
         Return
     }

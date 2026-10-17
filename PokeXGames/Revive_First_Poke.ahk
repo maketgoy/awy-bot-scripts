@@ -5,7 +5,7 @@
 ; "Trocar para uso rápido", depois informe a hotkey abaixo:
 
 ; Settings
-Hotkey_Revive := "R"
+Hotkey_Revive := "F1"
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -41,7 +41,6 @@ CheckIcons:
 
     ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %inputFocusIcon%
     If (ErrorLevel == 0) {
-        Tooltip, InputFocus
         isSuspended := true
         Return
     }
