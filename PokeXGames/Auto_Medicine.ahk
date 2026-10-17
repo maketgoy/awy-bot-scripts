@@ -13,7 +13,7 @@ negativeStatusIcons := [ GetFile("PokeXGames\Icons\Status\Debuff\blind.png")
     ; , GetFile("PokeXGames\Icons\Status\Debuff\fear.png")
     ; , GetFile("PokeXGames\Icons\Status\Debuff\paralyze.png")
     ; , GetFile("PokeXGames\Icons\Status\Debuff\silence.png")
-    ; , GetFile("PokeXGames\Icons\Status\Debuff\stun.png") ]
+    , GetFile("PokeXGames\Icons\Status\Debuff\stun.png") ]
     , GetFile("PokeXGames\Icons\Status\Debuff\slow.png") ]
 
 SetTimer, CheckMedicine, 100
