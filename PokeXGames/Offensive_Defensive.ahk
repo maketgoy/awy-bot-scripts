@@ -1,3 +1,5 @@
+; Switch to defensive when order pokemon and offensive when use some skill
+
 ; Settings
 Hotkey_PokeOrder = MButton
 Hotkey_Defensive = Delete
