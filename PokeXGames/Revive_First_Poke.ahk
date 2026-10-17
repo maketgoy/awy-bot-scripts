@@ -16,6 +16,7 @@ Hotkey_Revive := "F1"
 ;SetDefaultMouseSpeed, 0
 
 closeIcon := GetFile("PokeXGames\Icons\close.png")
+mapOpenIcon := GetFile("PokeXGames\Icons\map_open.png")
 chatOnIcon := GetFile("PokeXGames\Icons\chat_on.png")
 inputFocusIcon := GetFile("PokeXGames\Icons\input_focus.png")
 
@@ -28,6 +29,12 @@ Return
 
 CheckIcons:
     ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %closeIcon%
+    If (ErrorLevel == 0) {
+        isSuspended := true
+        Return
+    }
+
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %mapOpenIcon%
     If (ErrorLevel == 0) {
         isSuspended := true
         Return
