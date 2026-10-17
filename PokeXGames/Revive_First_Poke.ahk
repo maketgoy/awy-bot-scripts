@@ -5,27 +5,62 @@
 ; "Trocar para uso rápido", depois informe a hotkey abaixo:
 
 ; Settings
-Hotkey = F1
+Hotkey_Revive := "R"
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
-SetKeyDelay, -1, -1
-SetMouseDelay, -1
-SetDefaultMouseSpeed, 0
+;SetKeyDelay, -1, -1
+;SetMouseDelay, -1
+;SetDefaultMouseSpeed, 0
 
-Hotkey, $%Hotkey%, Revive, On
+closeIcon := GetFile("PokeXGames\Icons\close.png")
+chatOnIcon := GetFile("PokeXGames\Icons\chat_on.png")
+inputFocusIcon := GetFile("PokeXGames\Icons\input_focus.png")
+
+global isSuspended := false
+
+Hotkey, % "~$" . Hotkey_Revive, Revive, On
+
+SetTimer, CheckIcons, 100
+Return
+
+CheckIcons:
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %closeIcon%
+    If (ErrorLevel == 0) {
+        isSuspended := true
+        Return
+    }
+
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %chatOnIcon%
+    If (ErrorLevel == 0) {
+        isSuspended := true
+        Return
+    }
+
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %inputFocusIcon%
+    If (ErrorLevel == 0) {
+        Tooltip, InputFocus
+        isSuspended := true
+        Return
+    }
+
+    isSuspended := false
 Return
 
 Revive:
 {
+    If (isSuspended) {
+        Return
+    }
+
     MouseLock()
     MouseBackup()
 
     Click, 35, 70
     Sleep, 100
-    Send, {%Hotkey%}
+    Send, {%Hotkey_Revive%}
     Sleep, 100
     Click, 35, 70
 

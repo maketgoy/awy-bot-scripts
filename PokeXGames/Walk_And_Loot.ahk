@@ -1,8 +1,7 @@
 ; Auto loot when walking with WASD or Arrows
 
 ; Settings
-Hotkey_Loot := "x"
-Chat_Off_Delay := 800
+Hotkey_Loot := "X"
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ; DO NOT CHANGE BELOW ;
@@ -42,10 +41,11 @@ CheckIcons:
 Return
 
 AutoLoot:
-    ; Trava principal: só roda o loot se o chat estiver 100% OFF
-    If (!isSuspended) {
-        if GetKeyState("w", "P") || GetKeyState("a", "P") || GetKeyState("s", "P") || GetKeyState("d", "P")
-        || GetKeyState("Up", "P") || GetKeyState("Down", "P") || GetKeyState("Left", "P") || GetKeyState("Right", "P")
-            Send, %Hotkey_Loot%
+    If (isSuspended) {
+        Return
     }
+
+    If GetKeyState("w", "P") || GetKeyState("a", "P") || GetKeyState("s", "P") || GetKeyState("d", "P")
+    || GetKeyState("Up", "P") || GetKeyState("Down", "P") || GetKeyState("Left", "P") || GetKeyState("Right", "P")
+        Send, %Hotkey_Loot%
 Return
