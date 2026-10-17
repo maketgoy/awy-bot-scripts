@@ -15,7 +15,7 @@ Chat_Off_Delay := 800
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 closeIcon := GetFile("PokeAlliance\Icons\close.png")
-chatOnIcon := GetFile("PokeAlliance\Icons\chat-on.png")
+chatOnIcon := GetFile("PokeAlliance\Icons\chat_on.png")
 
 global lastChatSeen := 0
 global isChatOn := false
