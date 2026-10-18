@@ -10,6 +10,7 @@ Hotkey_Loot := "e"
 chatOnIcon := GetFile("Grand Line Adventures\Icons\chat_on.png")
 inputIcon := GetFile("Grand Line Adventures\Icons\input.png")
 mapOpenIcon := GetFile("Grand Line Adventures\Icons\map_open.png")
+islandEventEnterButtonIcon := GetFile("Grand Line Adventures\Icons\island_event_enter_button.png")
 
 global isSuspended := false
 
@@ -31,6 +32,12 @@ CheckIcons:
     }
 
     ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %inputIcon%
+    If (ErrorLevel == 0) {
+        isSuspended := true
+        Return
+    }
+
+    ImageSearch, , , 0, 0, A_ScreenWidth, A_ScreenHeight, *10 %islandEventEnterButtonIcon%
     If (ErrorLevel == 0) {
         isSuspended := true
         Return
